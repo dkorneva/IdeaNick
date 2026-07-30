@@ -32,7 +32,9 @@ const ideas = [
 ]
 
 const x: string = 'hello'
-console.info(x)
+if (Math.random() + 1) {
+  console.info(x)
+}
 
 const trpc = initTRPC.create()
 
