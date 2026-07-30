@@ -1,31 +1,36 @@
 {
-  "name": "@IdeaNick/webapp",
+  "name": "IdeaNick",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "..\\node_modules\\.bin\\eslint.cmd --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts,.tsx .",
-    "preview": "vite preview",
-    "types": "tsc --noEmit --project ./tsconfig.app.json && tsc --noEmit --project ./tsconfig.node.json",
-    "prettify": "prettier --log-level warn --cache --write \"{src/**/*,*}.{ts,tsx,js,json,yml,scss}\" --ignore-pattern \"**/{node_modules,dist}/**/*\""
-  },
-  "dependencies": {
-    "@IdeaNick/backend": "workspace:*",
-    "@tanstack/react-query": "^5.101.4",
-    "@trpc/client": "^11.18.0",
-    "@trpc/react-query": "^11.18.0",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "b": "pnpm --filter @IdeaNick/backend",
+    "w": "pnpm --filter @IdeaNick/webapp",
+    "dev": "pnpm -r --parallel dev",
+    "types": "concurrently \"pnpm b types\" \"pnpm w types\"",
+    "lint": "pnpm b lint && pnpm w lint",
+    "prettify": "pnpm -r --parallel prettify"
   },
   "devDependencies": {
-    "@types/node": "^24.13.2",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.3",
-    "globals": "^17.7.0",
-    "prettier": "^3.0.1",
-    "vite": "^8.1.1"
+    "@eslint/js": "^9.20.0",
+    "concurrently": "^10.0.4",
+    "eslint": "^9.20.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-react": "^7.37.4",
+    "globals": "^15.14.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.2.0",
+    "prettier": "^3.4.2",
+    "prettier-eslint": "^16.3.0",
+    "rimraf": "^6.1.3",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.24.0"
+  },
+  "overrides": {
+    "eslint": "9.20.0"
   }
 }

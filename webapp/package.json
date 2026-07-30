@@ -1,0 +1,31 @@
+{
+  "name": "@IdeaNick/webapp",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "..\\node_modules\\.bin\\eslint.cmd --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts,.tsx .",
+    "preview": "vite preview",
+    "types": "tsc --noEmit --project ./tsconfig.app.json && tsc --noEmit --project ./tsconfig.node.json",
+    "prettify": "prettier --log-level warn --cache --write \"{src/**/*,*}.{ts,tsx,js,json,yml,scss}\" --ignore-pattern \"**/{node_modules,dist}/**/*\""
+  },
+  "dependencies": {
+    "@IdeaNick/backend": "workspace:*",
+    "@tanstack/react-query": "^5.101.4",
+    "@trpc/client": "^11.18.0",
+    "@trpc/react-query": "^11.18.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "globals": "^17.7.0",
+    "prettier": "^3.0.1",
+    "vite": "^8.1.1"
+  }
+}

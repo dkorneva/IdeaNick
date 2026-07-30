@@ -1,50 +1,59 @@
-import baseConfig from '../eslint.config.js'
-import { dirname } from 'node:path'
-import { fileURLToPath } from 'node:url'
-import pluginReact from 'eslint-plugin-react'
+import pluginJs from '@eslint/js'
+import eslintConfigPrettier from 'eslint-config-prettier'
+import pluginImport from 'eslint-plugin-import'
+import prettierPlugin from 'eslint-plugin-prettier'
+import globals from 'globals'
+import tseslint from 'typescript-eslint'
+// import pluginJsxA11y from 'eslint-plugin-jsx-a11y';
 
-const tsconfigRootDir = dirname(fileURLToPath(import.meta.url))
-
-/** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
-  ...baseConfig,
-
-  pluginReact.configs.flat.recommended,
-
   {
-    files: ['**/*.{ts,tsx,js,jsx}'],
+    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
+  },
+  {
+    ignores: ['node_modules', 'dist'],
+  },
+  {
     plugins: {
-      react: pluginReact,
+      '@typescript-eslint': tseslint.plugin,
+      // 'react-hooks': eslintReactHooks,
+      // 'react-refresh': eslintReactRefresh,
+      prettier: prettierPlugin,
+      import: pluginImport,
     },
-    settings: {
-      react: {
-        version: 'detect',
-      },
-    },
-    languageOptions: {
-      parserOptions: {
-        project: ['tsconfig.json', 'tsconfig.node.json', 'tsconfig.app.json'],
-        tsconfigRootDir,
-      },
-    },
+  },
+  {
+    languageOptions: { globals: globals.browser },
+  },
+  pluginJs.configs.recommended,
+  ...tseslint.configs.recommended,
+  {
     rules: {
-      'react/react-in-jsx-scope': 'off', // React 17+ не требует импортировать React
-      //   'jsx-a11y/anchor-is-valid': 'off',
-    },
-  },
-
-  {
-    ignores: ['dist', 'node_modules', 'coverage', 'eslint.config.js'],
-  },
-
-  //   🔹 Специальные настройки для Vite-конфига
-  {
-    files: ['./vite.config.ts'],
-    languageOptions: {
-      parserOptions: {
-        project: ['tsconfig.json', 'tsconfig.node.json', 'tsconfig.app.json'],
-        tsconfigRootDir,
-      },
+      ...prettierPlugin.configs.recommended.rules,
+      ...eslintConfigPrettier.rules,
+      'react/react-in-jsx-scope': 'off',
+      'import/order': [
+        'error',
+        {
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: false,
+            orderImportKind: 'asc',
+          },
+        },
+      ],
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+      '@typescript-eslint/strict-boolean-expressions': 'off',
+      '@typescript-eslint/prefer-nullish-coalescing': 'off',
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/restrict-template-expressions': 'off',
+      '@typescript-eslint/triple-slash-reference': 'off',
+      '@typescript-eslint/ban-types': 'off',
+      '@typescript-eslint/consistent-type-assertions': 'off',
+      'jsx-a11y/anchor-is-valid': 'off',
+      curly: ['error', 'all'],
+      'no-irregular-whitespace': ['error', { skipTemplates: true, skipStrings: true }],
+      'no-console': ['error', { allow: ['info', 'error', 'warn'] }],
     },
   },
 ]

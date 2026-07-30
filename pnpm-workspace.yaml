@@ -1,0 +1,7 @@
+packages:
+- backend
+- webapp
+
+overrides:
+  resolve: 1.22.12
+
