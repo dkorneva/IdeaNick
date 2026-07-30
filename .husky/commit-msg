@@ -1,0 +1,38 @@
+# Read the commit message from the passed file
+commit_msg=$(cat "$1")
+
+# Filter out comments and empty lines
+actual_msg=$(printf "%s\n" "$commit_msg" | awk 'NF && $1 !~ /^#/')
+
+# Extract the first line and the rest
+first_line=$(printf "%s\n" "$actual_msg" | head -n 1)
+other_lines=$(printf "%s\n" "$actual_msg" | tail -n +2)
+
+# Format the first line:
+# - trim spaces
+# - remove trailing dots/spaces
+# - normalize spaces
+# - capitalize first letter
+formatted_first_line=$(printf "%s" "$first_line" \
+  | sed -e 's/^[[:space:]]*//' \
+        -e 's/[[:space:]]*\.*[[:space:]]*$//' \
+        -e 's/[[:space:]]\+/ /g' \
+  | awk '{
+      if (length($0) > 0) {
+        first = toupper(substr($0,1,1))
+        rest = substr($0,2)
+        print first rest
+      } else {
+        print
+      }
+    }')
+
+# Combine first line with the rest (if exists)
+if [ -n "$other_lines" ]; then
+  formatted_msg=$(printf "%s\n%s\n" "$formatted_first_line" "$other_lines")
+else
+  formatted_msg=$(printf "%s\n" "$formatted_first_line")
+fi
+
+# Write back to commit message file
+printf "%s" "$formatted_msg" > "$1"
