@@ -10,7 +10,7 @@
     "types": "pnpm b types && pnpm w types",
     "lint": "pnpm b lint && pnpm w lint",
     "prettify": "pnpm -r --parallel prettify",
-    "prepare": "husky init"
+    "prepare": "husky"
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
