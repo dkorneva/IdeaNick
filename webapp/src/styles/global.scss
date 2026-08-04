@@ -1,0 +1,33 @@
+// глобальные стили импортируем в App.tsx
+
+@import '../../node_modules/reset-css/reset.css';
+@import './vars.scss';
+
+html,
+body,
+#root {
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+body {
+  font-family: $defaultFontFamily;
+  font-size: $defaultFontSize;
+  background: $defaultBackgroundColor;
+  color: $defaultTextColor;
+  line-height: $defaultLineHeight;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+// mixin - набор некоторых css свойств, которые могут быть применены к разных другим css-элементам

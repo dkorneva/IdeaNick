@@ -1,7 +1,9 @@
 packages:
-- backend
-- webapp
+  - backend
+  - webapp
+
+allowBuilds:
+  '@parcel/watcher': true
 
 overrides:
   resolve: 1.22.12
-
