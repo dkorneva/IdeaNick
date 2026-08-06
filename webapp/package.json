@@ -18,12 +18,15 @@
     "@tanstack/react-query": "^5.101.4",
     "@trpc/client": "^11.18.0",
     "@trpc/react-query": "^11.18.0",
+    "formik": "^2.4.9",
+    "formik-validator-zod": "^1.0.2",
     "include-media": "^2.0.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.2",
     "reset-css": "^5.0.2",
-    "sass": "^1.102.0"
+    "sass": "^1.102.0",
+    "zod": "^3.22.2"
   },
   "devDependencies": {
     "@types/node": "^24.13.2",
