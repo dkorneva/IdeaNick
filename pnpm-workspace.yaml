@@ -4,6 +4,8 @@ packages:
 
 allowBuilds:
   '@parcel/watcher': true
+  '@prisma/engines': false
+  prisma: false
 
 overrides:
   resolve: 1.22.12
