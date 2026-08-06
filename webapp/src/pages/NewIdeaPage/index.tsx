@@ -4,6 +4,7 @@ import { useFormik } from 'formik'
 import { withZodSchema } from 'formik-validator-zod'
 import { useState } from 'react'
 import { Alert } from '../../components/Alert'
+import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
 import { TextArea } from '../../components/Textarea'
@@ -56,9 +57,7 @@ export const NewIdeaPage = () => {
         {/* !!formik.submitCount - два !!, чтобы явно указать, что это значение boolean */}
         {submittingError && <Alert color={'red'}>{submittingError}</Alert>}
         {successMessageVisible && <Alert color={'green'}>Idea created!</Alert>}
-        <button type="submit" disabled={formik.isSubmitting}>
-          {formik.isSubmitting ? 'Submitting...' : 'Create Idea'}
-        </button>
+        <Button loading={formik.isSubmitting}>Create Idea</Button>
       </form>
     </Segment>
   )
