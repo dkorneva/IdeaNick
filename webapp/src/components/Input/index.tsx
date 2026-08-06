@@ -27,7 +27,6 @@ export const Input = ({
       <label className={css.label} htmlFor={name}>
         {label}
       </label>
-      <br />
       <input
         className={cn({ [css.input]: true, [css.invalid]: invalid })}
         style={{ maxWidth }}
