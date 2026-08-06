@@ -30,6 +30,18 @@ export default [
     rules: {
       'react/react-in-jsx-scope': 'off', // React 17+ не требует импортировать React
       //   'jsx-a11y/anchor-is-valid': 'off',
+      '@typescript-eslint/no-restricted-imports': [
+        'error',
+        {
+          // Запрещаем импорт всего из @ideanick/backend, кроме /input
+          patterns: [
+            {
+              regex: '^@ideanick/backend/(?!(.*/)?input$).+$',
+              message: 'Импорт из бэкенда разрешен только для файлов input',
+            },
+          ],
+        },
+      ],
     },
   },
 
