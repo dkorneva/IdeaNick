@@ -1,0 +1,16 @@
+@import '../Input/index.module';
+
+// 1) один из вариантов переиспользования кода - импортируем стили, которые были у input и переопределяем .input для textarea
+
+// 2) для input можно было создать miin
+
+// 3) можно было вынести всё содержимое return у Input и Textarea в отдельный компонент
+
+.field {
+  .input {
+    min-height: 150px;
+    width: 100%;
+    max-width: none;
+    resize: vertical;
+  }
+}
