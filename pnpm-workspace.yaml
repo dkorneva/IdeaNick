@@ -5,6 +5,7 @@ packages:
 allowBuilds:
   '@parcel/watcher': true
   '@prisma/engines': false
+  esbuild: false
   prisma: false
 
 overrides:

@@ -19,11 +19,11 @@ const queryClient = new QueryClient({
 
 // trpcClient должен знать, где endpoint для всех trpc роутов
 const trpcClient = trpc.createClient({
+  transformer: superjson,
   links: [
-    // httpsBatchLink нужен, чтобы если одновременно вызвано несколько query, он соединит их все в одну и получится один запрос
+    // httpBatchLink нужен, чтобы если одновременно вызвано несколько query, он соединит их все в одну и получится один запрос
     httpBatchLink({
       url: 'http://localhost:3000/trpc',
-      transformer: superjson,
     }),
   ],
 })

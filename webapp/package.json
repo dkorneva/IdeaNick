@@ -15,9 +15,9 @@
   },
   "dependencies": {
     "@IdeaNick/backend": "workspace:*",
-    "@tanstack/react-query": "^5.101.4",
-    "@trpc/client": "^11.18.0",
-    "@trpc/react-query": "^11.18.0",
+    "@tanstack/react-query": "^4.36.1",
+    "@trpc/client": "^10.45.2",
+    "@trpc/react-query": "^10.45.2",
     "classnames": "^2.5.1",
     "date-fns": "^4.4.0",
     "formik": "^2.4.9",
