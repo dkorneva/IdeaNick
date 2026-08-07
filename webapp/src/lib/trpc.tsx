@@ -1,7 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/no-restricted-imports
 import type { TrpcRouter } from '@IdeaNick/backend/src/router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createTRPCReact, httpBatchLink } from '@trpc/react-query'
 import type { ReactNode } from 'react'
+import superjson from 'superjson'
 
 export const trpc = createTRPCReact<TrpcRouter>()
 
@@ -21,6 +23,7 @@ const trpcClient = trpc.createClient({
     // httpsBatchLink нужен, чтобы если одновременно вызвано несколько query, он соединит их все в одну и получится один запрос
     httpBatchLink({
       url: 'http://localhost:3000/trpc',
+      transformer: superjson,
     }),
   ],
 })

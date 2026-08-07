@@ -29,6 +29,7 @@ export type IdeaMinAggregateOutputType = {
   name: string | null
   description: string | null
   text: string | null
+  createdAt: Date | null
 }
 
 export type IdeaMaxAggregateOutputType = {
@@ -37,6 +38,7 @@ export type IdeaMaxAggregateOutputType = {
   name: string | null
   description: string | null
   text: string | null
+  createdAt: Date | null
 }
 
 export type IdeaCountAggregateOutputType = {
@@ -45,6 +47,7 @@ export type IdeaCountAggregateOutputType = {
   name: number
   description: number
   text: number
+  createdAt: number
   _all: number
 }
 
@@ -54,6 +57,7 @@ export type IdeaMinAggregateInputType = {
   name?: true
   description?: true
   text?: true
+  createdAt?: true
 }
 
 export type IdeaMaxAggregateInputType = {
@@ -62,6 +66,7 @@ export type IdeaMaxAggregateInputType = {
   name?: true
   description?: true
   text?: true
+  createdAt?: true
 }
 
 export type IdeaCountAggregateInputType = {
@@ -70,6 +75,7 @@ export type IdeaCountAggregateInputType = {
   name?: true
   description?: true
   text?: true
+  createdAt?: true
   _all?: true
 }
 
@@ -152,6 +158,7 @@ export type IdeaGroupByOutputType = {
   name: string
   description: string
   text: string
+  createdAt: Date
   _count: IdeaCountAggregateOutputType | null
   _min: IdeaMinAggregateOutputType | null
   _max: IdeaMaxAggregateOutputType | null
@@ -178,6 +185,7 @@ export type IdeaWhereInput = {
   name?: Prisma.StringFilter<'Idea'> | string
   description?: Prisma.StringFilter<'Idea'> | string
   text?: Prisma.StringFilter<'Idea'> | string
+  createdAt?: Prisma.DateTimeFilter<'Idea'> | Date | string
 }
 
 export type IdeaOrderByWithRelationInput = {
@@ -186,6 +194,7 @@ export type IdeaOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   text?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type IdeaWhereUniqueInput = Prisma.AtLeast<
@@ -198,6 +207,7 @@ export type IdeaWhereUniqueInput = Prisma.AtLeast<
     name?: Prisma.StringFilter<'Idea'> | string
     description?: Prisma.StringFilter<'Idea'> | string
     text?: Prisma.StringFilter<'Idea'> | string
+    createdAt?: Prisma.DateTimeFilter<'Idea'> | Date | string
   },
   'id' | 'nick'
 >
@@ -208,6 +218,7 @@ export type IdeaOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   text?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   _count?: Prisma.IdeaCountOrderByAggregateInput
   _max?: Prisma.IdeaMaxOrderByAggregateInput
   _min?: Prisma.IdeaMinOrderByAggregateInput
@@ -222,6 +233,7 @@ export type IdeaScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<'Idea'> | string
   description?: Prisma.StringWithAggregatesFilter<'Idea'> | string
   text?: Prisma.StringWithAggregatesFilter<'Idea'> | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<'Idea'> | Date | string
 }
 
 export type IdeaCreateInput = {
@@ -230,6 +242,7 @@ export type IdeaCreateInput = {
   name: string
   description: string
   text: string
+  createdAt?: Date | string
 }
 
 export type IdeaUncheckedCreateInput = {
@@ -238,6 +251,7 @@ export type IdeaUncheckedCreateInput = {
   name: string
   description: string
   text: string
+  createdAt?: Date | string
 }
 
 export type IdeaUpdateInput = {
@@ -246,6 +260,7 @@ export type IdeaUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type IdeaUncheckedUpdateInput = {
@@ -254,6 +269,7 @@ export type IdeaUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type IdeaCreateManyInput = {
@@ -262,6 +278,7 @@ export type IdeaCreateManyInput = {
   name: string
   description: string
   text: string
+  createdAt?: Date | string
 }
 
 export type IdeaUpdateManyMutationInput = {
@@ -270,6 +287,7 @@ export type IdeaUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type IdeaUncheckedUpdateManyInput = {
@@ -278,6 +296,7 @@ export type IdeaUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type IdeaCountOrderByAggregateInput = {
@@ -286,6 +305,7 @@ export type IdeaCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   text?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type IdeaMaxOrderByAggregateInput = {
@@ -294,6 +314,7 @@ export type IdeaMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   text?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type IdeaMinOrderByAggregateInput = {
@@ -302,10 +323,15 @@ export type IdeaMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   text?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
 export type IdeaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
@@ -316,6 +342,7 @@ export type IdeaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
       name?: boolean
       description?: boolean
       text?: boolean
+      createdAt?: boolean
     },
     ExtArgs['result']['idea']
   >
@@ -329,6 +356,7 @@ export type IdeaSelectCreateManyAndReturn<
     name?: boolean
     description?: boolean
     text?: boolean
+    createdAt?: boolean
   },
   ExtArgs['result']['idea']
 >
@@ -342,6 +370,7 @@ export type IdeaSelectUpdateManyAndReturn<
     name?: boolean
     description?: boolean
     text?: boolean
+    createdAt?: boolean
   },
   ExtArgs['result']['idea']
 >
@@ -352,10 +381,14 @@ export type IdeaSelectScalar = {
   name?: boolean
   description?: boolean
   text?: boolean
+  createdAt?: boolean
 }
 
 export type IdeaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
-  runtime.Types.Extensions.GetOmit<'id' | 'nick' | 'name' | 'description' | 'text', ExtArgs['result']['idea']>
+  runtime.Types.Extensions.GetOmit<
+    'id' | 'nick' | 'name' | 'description' | 'text' | 'createdAt',
+    ExtArgs['result']['idea']
+  >
 
 export type $IdeaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
   {
@@ -368,6 +401,7 @@ export type $IdeaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
         name: string
         description: string
         text: string
+        createdAt: Date
       },
       ExtArgs['result']['idea']
     >
@@ -881,6 +915,7 @@ export interface IdeaFieldRefs {
   readonly name: Prisma.FieldRef<'Idea', 'String'>
   readonly description: Prisma.FieldRef<'Idea', 'String'>
   readonly text: Prisma.FieldRef<'Idea', 'String'>
+  readonly createdAt: Prisma.FieldRef<'Idea', 'DateTime'>
 }
 
 // Custom InputTypes
