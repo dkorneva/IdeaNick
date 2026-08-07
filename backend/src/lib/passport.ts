@@ -36,6 +36,10 @@ export const applyPassportToExpressApp = (expressApp: Express, ctx: AppContext):
       next()
       return
     }
-    passport.authenticate('jwt', { session: false })(req, res, next)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    passport.authenticate('jwt', { session: false }, (...args: any[]) => {
+      req.user = args[1] || undefined
+      next()
+    })(req, res, next)
   })
 }
