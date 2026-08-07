@@ -1,7 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports
 import type { TrpcRouter } from '@IdeaNick/backend/src/router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { createTRPCReact, httpBatchLink } from '@trpc/react-query'
+import { httpBatchLink } from '@trpc/client'
+import { createTRPCReact } from '@trpc/react-query'
 import type { ReactNode } from 'react'
 import superjson from 'superjson'
 
