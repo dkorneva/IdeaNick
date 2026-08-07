@@ -7,6 +7,9 @@ export const createIdeaTrpcRoute = trpc.procedure
   // дублируем проверку с фронта, т.к. не гарантируем, что данные с клиента придут правильные
   .input(zCreateIdeaTrpcInput)
   .mutation(async ({ ctx, input }) => {
+    if (!ctx.me) {
+      throw new Error('UNAUTHORIZED')
+    }
     const exIdea = await ctx.prisma.idea.findUnique({
       where: {
         nick: input.nick,
@@ -16,7 +19,7 @@ export const createIdeaTrpcRoute = trpc.procedure
       throw new Error('Idea with this nick already exists')
     }
     await ctx.prisma.idea.create({
-      data: input,
+      data: { ...input, authorId: ctx.me.id },
     })
     return true
   })
