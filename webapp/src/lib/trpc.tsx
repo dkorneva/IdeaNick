@@ -3,6 +3,7 @@ import type { TrpcRouter } from '@IdeaNick/backend/src/router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { httpBatchLink } from '@trpc/client'
 import { createTRPCReact } from '@trpc/react-query'
+import Cookies from 'js-cookie'
 import type { ReactNode } from 'react'
 import superjson from 'superjson'
 
@@ -25,6 +26,13 @@ const trpcClient = trpc.createClient({
     // httpBatchLink нужен, чтобы если одновременно вызвано несколько query, он соединит их все в одну и получится один запрос
     httpBatchLink({
       url: 'http://localhost:3000/trpc',
+
+      headers: () => {
+        const token = Cookies.get('token')
+        return {
+          ...(token && { authorization: `Bearer ${token}` }),
+        }
+      },
     }),
   ],
 })

@@ -1,9 +1,10 @@
 import { trpc } from '../lib/trpc'
 // @index('./**/index.ts', f => `import { ${f.path.split('/').slice(0, -1).pop()}TrpcRoute } from '${f.path.split('/').slice(0, -1).join('/')}'`)
-import { SignInTrpcRoute } from './SignIn'
+import { signInTrpcRoute } from './SignIn'
 import { createIdeaTrpcRoute } from './createIdea'
 import { getIdeaTrpcRoute } from './getIdea'
 import { getIdeasTrpcRoute } from './getIdeas'
+import { getMeTrpcRoute } from './getMe'
 import { signUpTrpcRoute } from './signUp'
 // @endindex
 
@@ -12,7 +13,8 @@ export const trpcRouter = trpc.router({
   createIdea: createIdeaTrpcRoute,
   getIdea: getIdeaTrpcRoute,
   getIdeas: getIdeasTrpcRoute,
-  SignIn: SignInTrpcRoute,
+  getMe: getMeTrpcRoute,
+  SignIn: signInTrpcRoute,
   signUp: signUpTrpcRoute,
   // @endindex
 })
