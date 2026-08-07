@@ -29,6 +29,13 @@ export default [
     },
     rules: {
       'react/react-in-jsx-scope': 'off', // React 17+ не требует импортировать React
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: '[object.type=MetaProperty][property.name=env]',
+          message: 'Use instead import { env } from "lib/env"',
+        },
+      ],
       //   'jsx-a11y/anchor-is-valid': 'off',
       '@typescript-eslint/no-restricted-imports': [
         'error',

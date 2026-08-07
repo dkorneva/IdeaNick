@@ -6,6 +6,7 @@ import { createTRPCReact } from '@trpc/react-query'
 import Cookies from 'js-cookie'
 import type { ReactNode } from 'react'
 import superjson from 'superjson'
+import { env } from './env'
 
 export const trpc = createTRPCReact<TrpcRouter>()
 
@@ -25,7 +26,7 @@ const trpcClient = trpc.createClient({
   links: [
     // httpBatchLink нужен, чтобы если одновременно вызвано несколько query, он соединит их все в одну и получится один запрос
     httpBatchLink({
-      url: 'http://localhost:3000/trpc',
+      url: env.VITE_BACKEND_TRPC_URL,
 
       headers: () => {
         const token = Cookies.get('token')

@@ -4,11 +4,18 @@ import pluginImport from 'eslint-plugin-import'
 import prettierPlugin from 'eslint-plugin-prettier'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
+import node from 'eslint-plugin-node'
 // import pluginJsxA11y from 'eslint-plugin-jsx-a11y';
 
 export default [
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
+    plugins: {
+      node,
+    },
+    rules: {
+      'node/no-process-env': 'error',
+    },
   },
   {
     ignores: ['node_modules', 'dist'],
