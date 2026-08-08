@@ -35,8 +35,8 @@ export const Layout = () => {
                   Sign In
                 </Link>
               </li>
-              <li>
-                <Link className={css.item} to={getSignUpRoute()}>
+              <li className={css.item}>
+                <Link className={css.link} to={getSignUpRoute()}>
                   Sign Up
                 </Link>
               </li>
