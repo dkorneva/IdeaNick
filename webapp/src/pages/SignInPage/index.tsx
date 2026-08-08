@@ -33,7 +33,7 @@ export const SignInPage = () => {
       <form onSubmit={formik.handleSubmit}>
         <FormItems>
           <Input label="Nick" name="nick" formik={formik} />
-          <Input label="Password" name="password" formik={formik} />
+          <Input label="Password" name="password" formik={formik} type="password" />
           <Alert {...alertProps}></Alert>
           <Button {...buttonProps}>Sign In</Button>
         </FormItems>

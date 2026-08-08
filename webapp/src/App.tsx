@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Layout } from './components/Layout'
+import { AppContextProvider } from './lib/ctx'
 import * as routes from './lib/routes'
 import { TrpcProvider } from './lib/trpc'
 import { AllIdeasPage } from './pages/AllIdeasPage'
@@ -16,19 +17,21 @@ export const App = () => {
   // благодаря этому внутри этих страниц будут доступны trpc-функции
   return (
     <TrpcProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path={routes.getSignOutRoute()} element={<SignOutPage />}></Route>
-          <Route element={<Layout />}>
-            <Route path={routes.getSignInRoute()} element={<SignInPage />}></Route>
-            <Route path={routes.getSignUpRoute()} element={<SignUpPage />}></Route>
-            <Route path={routes.getAllIdeasRoute()} element={<AllIdeasPage />}></Route>
-            <Route path={routes.getNewIdeaRoute()} element={<NewIdeaPage />}></Route>
-            <Route path={routes.getViewIdeaRoute(routes.viewIdeaRouteParams)} element={<ViewIdeaPage />}></Route>
-            <Route path={routes.getEditIdeaRoute(routes.editIdeaRouteParams)} element={<EditIdeaPage />}></Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <AppContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path={routes.getSignOutRoute()} element={<SignOutPage />}></Route>
+            <Route element={<Layout />}>
+              <Route path={routes.getSignInRoute()} element={<SignInPage />}></Route>
+              <Route path={routes.getSignUpRoute()} element={<SignUpPage />}></Route>
+              <Route path={routes.getAllIdeasRoute()} element={<AllIdeasPage />}></Route>
+              <Route path={routes.getNewIdeaRoute()} element={<NewIdeaPage />}></Route>
+              <Route path={routes.getViewIdeaRoute(routes.viewIdeaRouteParams)} element={<ViewIdeaPage />}></Route>
+              <Route path={routes.getEditIdeaRoute(routes.editIdeaRouteParams)} element={<EditIdeaPage />}></Route>
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </AppContextProvider>
     </TrpcProvider>
   )
 }
