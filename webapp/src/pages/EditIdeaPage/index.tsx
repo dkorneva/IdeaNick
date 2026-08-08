@@ -1,10 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports
 import type { TrpcRouterOutput } from '@IdeaNick/backend/src/router'
 import { zUpdateIdeaTrpcInput } from '@IdeaNick/backend/src/router/updateIdea/input'
-import { useFormik } from 'formik'
-import { withZodSchema } from 'formik-validator-zod'
 import pick from 'lodash/pick'
-import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Alert } from '../../components/Alert'
 import { Button } from '../../components/Button'
@@ -12,28 +9,24 @@ import { FormItems } from '../../components/FormItems'
 import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
 import { TextArea } from '../../components/Textarea'
+import { useForm } from '../../lib/form'
 import { type EditIdeaRouteParams, getViewIdeaRoute } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
 
 // idea - это то, что возвращается по TrcRouterOutput по endpoint getIdea в объекте idea
 const EditIdeaComponent = ({ idea }: { idea: NonNullable<TrpcRouterOutput['getIdea']['idea']> }) => {
   const navigate = useNavigate()
-  const [submittingError, setSubmittingError] = useState<string | null>(null)
   const updateIdea = trpc.updateIdea.useMutation()
-  const formik = useFormik({
+  const { formik, buttonProps, alertProps } = useForm({
     initialValues: pick(idea, ['name', 'nick', 'description', 'text']),
     // omit - в валидации формы не нужен ideaId (обратно extend)
-    validate: withZodSchema(zUpdateIdeaTrpcInput.omit({ ideaId: true })),
+    validationSchema: zUpdateIdeaTrpcInput.omit({ ideaId: true }),
     onSubmit: async (values) => {
-      try {
-        setSubmittingError(null)
-        await updateIdea.mutateAsync({ ideaId: idea.id, ...values })
-        navigate(getViewIdeaRoute({ ideaNick: values.nick }))
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } catch (error: any) {
-        setSubmittingError(error.message)
-      }
+      await updateIdea.mutateAsync({ ideaId: idea.id, ...values })
+      navigate(getViewIdeaRoute({ ideaNick: values.nick }))
     },
+    resetOnSuccess: false,
+    showValidationAlert: true,
   })
 
   return (
@@ -44,9 +37,8 @@ const EditIdeaComponent = ({ idea }: { idea: NonNullable<TrpcRouterOutput['getId
           <Input label="Nick" name="nick" formik={formik} />
           <Input label="Description" name="description" formik={formik} maxWidth={500} />
           <TextArea label="Text" name="text" formik={formik} />
-          {!formik.isValid && !!formik.submitCount && <Alert color="red">Some fields are invalid</Alert>}
-          {submittingError && <Alert color="red">{submittingError}</Alert>}
-          <Button loading={formik.isSubmitting}>Update Idea</Button>
+          <Alert {...alertProps}></Alert>
+          <Button {...buttonProps}>Update Idea</Button>
         </FormItems>
       </form>
     </Segment>
