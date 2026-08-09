@@ -1,17 +1,17 @@
 import { zSignInTrpcInput } from '@IdeaNick/backend/src/router/SignIn/input'
 import Cookies from 'js-cookie'
-import { useNavigate } from 'react-router-dom'
 import { Alert } from '../../components/Alert'
 import { Button } from '../../components/Button'
 import { FormItems } from '../../components/FormItems'
 import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
 import { useForm } from '../../lib/form'
-import { getAllIdeasRoute } from '../../lib/routes'
+import { withPageWrapper } from '../../lib/pageWrapper'
 import { trpc } from '../../lib/trpc'
 
-export const SignInPage = () => {
-  const navigate = useNavigate()
+export const SignInPage = withPageWrapper({
+  redirectAuthorized: true,
+})(() => {
   const trpcUtils = trpc.useUtils()
   const signIn = trpc.SignIn.useMutation()
   const { formik, buttonProps, alertProps } = useForm({
@@ -24,7 +24,6 @@ export const SignInPage = () => {
       const { token } = await signIn.mutateAsync(values)
       Cookies.set('token', token, { expires: 99999 })
       void trpcUtils.invalidate() // инвалидация помечает все запросы, которые только что были отправлены и которые помнит приложение, как невалидные и перезапрашивает их
-      navigate(getAllIdeasRoute())
     },
     resetOnSuccess: false,
   })
@@ -40,4 +39,4 @@ export const SignInPage = () => {
       </form>
     </Segment>
   )
-}
+})

@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-restricted-imports
-import type { TrpcRouterOutput } from '@IdeaNick/backend/src/router'
 import { zUpdateIdeaTrpcInput } from '@IdeaNick/backend/src/router/updateIdea/input'
 import pick from 'lodash/pick'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -9,13 +7,31 @@ import { FormItems } from '../../components/FormItems'
 import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
 import { TextArea } from '../../components/Textarea'
-import { useMe } from '../../lib/ctx'
+
 import { useForm } from '../../lib/form'
+import { withPageWrapper } from '../../lib/pageWrapper'
 import { type EditIdeaRouteParams, getViewIdeaRoute } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
 
 // idea - это то, что возвращается по TrcRouterOutput по endpoint getIdea в объекте idea
-const EditIdeaComponent = ({ idea }: { idea: NonNullable<TrpcRouterOutput['getIdea']['idea']> }) => {
+export const EditIdeaPage = withPageWrapper({
+  authorizedOnly: true,
+  useQuery: () => {
+    const { ideaNick } = useParams() as EditIdeaRouteParams
+    return trpc.getIdea.useQuery({
+      ideaNick,
+    })
+  },
+  // функция для проверки наличия запрашиваемой сущности
+  checkExists: ({ queryResult }) => !!queryResult.data.idea,
+  checkExistsMessage: 'Idea not found',
+  // может ли пользователь смотреть на страницу, исходя из того, является ли он автором идеи
+  checkAccess: ({ queryResult, ctx }) => !!ctx.me && ctx.me.id === queryResult.data.idea?.authorId,
+  checkAccessMessage: 'An idea can only be edited by the author',
+  setProps: ({ queryResult }) => ({
+    idea: queryResult.data.idea!,
+  }),
+})(({ idea }) => {
   const navigate = useNavigate()
   const updateIdea = trpc.updateIdea.useMutation()
   const { formik, buttonProps, alertProps } = useForm({
@@ -44,36 +60,4 @@ const EditIdeaComponent = ({ idea }: { idea: NonNullable<TrpcRouterOutput['getId
       </form>
     </Segment>
   )
-}
-
-export const EditIdeaPage = () => {
-  const { ideaNick } = useParams() as EditIdeaRouteParams
-
-  const getIdeaResult = trpc.getIdea.useQuery({
-    ideaNick,
-  })
-  const me = useMe()
-
-  if (getIdeaResult.isLoading || getIdeaResult.isFetching) {
-    return <span>Loading...</span>
-  }
-
-  if (getIdeaResult.isError) {
-    return <span>Error: {getIdeaResult.error.message}</span>
-  }
-
-  if (!getIdeaResult.data.idea) {
-    return <span>Idea not found</span>
-  }
-
-  const idea = getIdeaResult.data.idea
-
-  if (!me) {
-    return <span>Only for authorized</span>
-  }
-
-  if (me.id !== idea.authorId) {
-    return <span>An idea can only be edited by the author</span>
-  }
-  return <EditIdeaComponent idea={idea} />
-}
+})
