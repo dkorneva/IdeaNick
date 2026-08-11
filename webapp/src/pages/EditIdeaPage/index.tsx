@@ -22,15 +22,13 @@ export const EditIdeaPage = withPageWrapper({
       ideaNick,
     })
   },
-  // функция для проверки наличия запрашиваемой сущности
-  checkExists: ({ queryResult }) => !!queryResult.data.idea,
-  checkExistsMessage: 'Idea not found',
-  // может ли пользователь смотреть на страницу, исходя из того, является ли он автором идеи
-  checkAccess: ({ queryResult, ctx }) => !!ctx.me && ctx.me.id === queryResult.data.idea?.authorId,
-  checkAccessMessage: 'An idea can only be edited by the author',
-  setProps: ({ queryResult }) => ({
-    idea: queryResult.data.idea!,
-  }),
+  setProps: ({ queryResult, ctx, checkExists, checkAccess }) => {
+    const idea = checkExists(queryResult.data.idea, 'Idea not found')
+    checkAccess(ctx.me?.id === idea.authorId, 'An idea can only be edited by the author')
+    return {
+      idea,
+    }
+  },
 })(({ idea }) => {
   const navigate = useNavigate()
   const updateIdea = trpc.updateIdea.useMutation()
