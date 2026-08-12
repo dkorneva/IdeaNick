@@ -80,6 +80,7 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const IdeaScalarFieldEnum = {
   id: 'id',
   nick: 'nick',
+  serialNumber: 'serialNumber',
   name: 'name',
   description: 'description',
   text: 'text',

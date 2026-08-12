@@ -19,13 +19,24 @@ export type IdeaModel = runtime.Types.Result.DefaultSelection<Prisma.$IdeaPayloa
 
 export type AggregateIdea = {
   _count: IdeaCountAggregateOutputType | null
+  _avg: IdeaAvgAggregateOutputType | null
+  _sum: IdeaSumAggregateOutputType | null
   _min: IdeaMinAggregateOutputType | null
   _max: IdeaMaxAggregateOutputType | null
+}
+
+export type IdeaAvgAggregateOutputType = {
+  serialNumber: number | null
+}
+
+export type IdeaSumAggregateOutputType = {
+  serialNumber: number | null
 }
 
 export type IdeaMinAggregateOutputType = {
   id: string | null
   nick: string | null
+  serialNumber: number | null
   name: string | null
   description: string | null
   text: string | null
@@ -36,6 +47,7 @@ export type IdeaMinAggregateOutputType = {
 export type IdeaMaxAggregateOutputType = {
   id: string | null
   nick: string | null
+  serialNumber: number | null
   name: string | null
   description: string | null
   text: string | null
@@ -46,6 +58,7 @@ export type IdeaMaxAggregateOutputType = {
 export type IdeaCountAggregateOutputType = {
   id: number
   nick: number
+  serialNumber: number
   name: number
   description: number
   text: number
@@ -54,9 +67,18 @@ export type IdeaCountAggregateOutputType = {
   _all: number
 }
 
+export type IdeaAvgAggregateInputType = {
+  serialNumber?: true
+}
+
+export type IdeaSumAggregateInputType = {
+  serialNumber?: true
+}
+
 export type IdeaMinAggregateInputType = {
   id?: true
   nick?: true
+  serialNumber?: true
   name?: true
   description?: true
   text?: true
@@ -67,6 +89,7 @@ export type IdeaMinAggregateInputType = {
 export type IdeaMaxAggregateInputType = {
   id?: true
   nick?: true
+  serialNumber?: true
   name?: true
   description?: true
   text?: true
@@ -77,6 +100,7 @@ export type IdeaMaxAggregateInputType = {
 export type IdeaCountAggregateInputType = {
   id?: true
   nick?: true
+  serialNumber?: true
   name?: true
   description?: true
   text?: true
@@ -125,6 +149,18 @@ export type IdeaAggregateArgs<
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
+   * Select which fields to average
+   **/
+  _avg?: IdeaAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   *
+   * Select which fields to sum
+   **/
+  _sum?: IdeaSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   *
    * Select which fields to find the minimum value
    **/
   _min?: IdeaMinAggregateInputType
@@ -154,6 +190,8 @@ export type IdeaGroupByArgs<
   take?: number
   skip?: number
   _count?: IdeaCountAggregateInputType | true
+  _avg?: IdeaAvgAggregateInputType
+  _sum?: IdeaSumAggregateInputType
   _min?: IdeaMinAggregateInputType
   _max?: IdeaMaxAggregateInputType
 }
@@ -161,12 +199,15 @@ export type IdeaGroupByArgs<
 export type IdeaGroupByOutputType = {
   id: string
   nick: string
+  serialNumber: number
   name: string
   description: string
   text: string
   createdAt: Date
   authorId: string
   _count: IdeaCountAggregateOutputType | null
+  _avg: IdeaAvgAggregateOutputType | null
+  _sum: IdeaSumAggregateOutputType | null
   _min: IdeaMinAggregateOutputType | null
   _max: IdeaMaxAggregateOutputType | null
 }
@@ -189,6 +230,7 @@ export type IdeaWhereInput = {
   NOT?: Prisma.IdeaWhereInput | Prisma.IdeaWhereInput[]
   id?: Prisma.StringFilter<'Idea'> | string
   nick?: Prisma.StringFilter<'Idea'> | string
+  serialNumber?: Prisma.IntFilter<'Idea'> | number
   name?: Prisma.StringFilter<'Idea'> | string
   description?: Prisma.StringFilter<'Idea'> | string
   text?: Prisma.StringFilter<'Idea'> | string
@@ -200,6 +242,7 @@ export type IdeaWhereInput = {
 export type IdeaOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   nick?: Prisma.SortOrder
+  serialNumber?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   text?: Prisma.SortOrder
@@ -212,6 +255,7 @@ export type IdeaWhereUniqueInput = Prisma.AtLeast<
   {
     id?: string
     nick?: string
+    serialNumber?: number
     AND?: Prisma.IdeaWhereInput | Prisma.IdeaWhereInput[]
     OR?: Prisma.IdeaWhereInput[]
     NOT?: Prisma.IdeaWhereInput | Prisma.IdeaWhereInput[]
@@ -222,20 +266,23 @@ export type IdeaWhereUniqueInput = Prisma.AtLeast<
     authorId?: Prisma.StringFilter<'Idea'> | string
     author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   },
-  'id' | 'nick'
+  'id' | 'nick' | 'serialNumber'
 >
 
 export type IdeaOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   nick?: Prisma.SortOrder
+  serialNumber?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   text?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   _count?: Prisma.IdeaCountOrderByAggregateInput
+  _avg?: Prisma.IdeaAvgOrderByAggregateInput
   _max?: Prisma.IdeaMaxOrderByAggregateInput
   _min?: Prisma.IdeaMinOrderByAggregateInput
+  _sum?: Prisma.IdeaSumOrderByAggregateInput
 }
 
 export type IdeaScalarWhereWithAggregatesInput = {
@@ -244,6 +291,7 @@ export type IdeaScalarWhereWithAggregatesInput = {
   NOT?: Prisma.IdeaScalarWhereWithAggregatesInput | Prisma.IdeaScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<'Idea'> | string
   nick?: Prisma.StringWithAggregatesFilter<'Idea'> | string
+  serialNumber?: Prisma.IntWithAggregatesFilter<'Idea'> | number
   name?: Prisma.StringWithAggregatesFilter<'Idea'> | string
   description?: Prisma.StringWithAggregatesFilter<'Idea'> | string
   text?: Prisma.StringWithAggregatesFilter<'Idea'> | string
@@ -254,6 +302,7 @@ export type IdeaScalarWhereWithAggregatesInput = {
 export type IdeaCreateInput = {
   id?: string
   nick: string
+  serialNumber?: number
   name: string
   description: string
   text: string
@@ -264,6 +313,7 @@ export type IdeaCreateInput = {
 export type IdeaUncheckedCreateInput = {
   id?: string
   nick: string
+  serialNumber?: number
   name: string
   description: string
   text: string
@@ -284,6 +334,7 @@ export type IdeaUpdateInput = {
 export type IdeaUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nick?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNumber?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
@@ -294,6 +345,7 @@ export type IdeaUncheckedUpdateInput = {
 export type IdeaCreateManyInput = {
   id?: string
   nick: string
+  serialNumber?: number
   name: string
   description: string
   text: string
@@ -313,6 +365,7 @@ export type IdeaUpdateManyMutationInput = {
 export type IdeaUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nick?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNumber?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
@@ -333,6 +386,7 @@ export type IdeaOrderByRelationAggregateInput = {
 export type IdeaCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nick?: Prisma.SortOrder
+  serialNumber?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   text?: Prisma.SortOrder
@@ -340,9 +394,14 @@ export type IdeaCountOrderByAggregateInput = {
   authorId?: Prisma.SortOrder
 }
 
+export type IdeaAvgOrderByAggregateInput = {
+  serialNumber?: Prisma.SortOrder
+}
+
 export type IdeaMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nick?: Prisma.SortOrder
+  serialNumber?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   text?: Prisma.SortOrder
@@ -353,11 +412,16 @@ export type IdeaMaxOrderByAggregateInput = {
 export type IdeaMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nick?: Prisma.SortOrder
+  serialNumber?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   text?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
+}
+
+export type IdeaSumOrderByAggregateInput = {
+  serialNumber?: Prisma.SortOrder
 }
 
 export type IdeaCreateNestedManyWithoutAuthorInput = {
@@ -414,9 +478,18 @@ export type IdeaUncheckedUpdateManyWithoutAuthorNestedInput = {
   deleteMany?: Prisma.IdeaScalarWhereInput | Prisma.IdeaScalarWhereInput[]
 }
 
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type IdeaCreateWithoutAuthorInput = {
   id?: string
   nick: string
+  serialNumber?: number
   name: string
   description: string
   text: string
@@ -426,6 +499,7 @@ export type IdeaCreateWithoutAuthorInput = {
 export type IdeaUncheckedCreateWithoutAuthorInput = {
   id?: string
   nick: string
+  serialNumber?: number
   name: string
   description: string
   text: string
@@ -464,6 +538,7 @@ export type IdeaScalarWhereInput = {
   NOT?: Prisma.IdeaScalarWhereInput | Prisma.IdeaScalarWhereInput[]
   id?: Prisma.StringFilter<'Idea'> | string
   nick?: Prisma.StringFilter<'Idea'> | string
+  serialNumber?: Prisma.IntFilter<'Idea'> | number
   name?: Prisma.StringFilter<'Idea'> | string
   description?: Prisma.StringFilter<'Idea'> | string
   text?: Prisma.StringFilter<'Idea'> | string
@@ -474,6 +549,7 @@ export type IdeaScalarWhereInput = {
 export type IdeaCreateManyAuthorInput = {
   id?: string
   nick: string
+  serialNumber?: number
   name: string
   description: string
   text: string
@@ -492,6 +568,7 @@ export type IdeaUpdateWithoutAuthorInput = {
 export type IdeaUncheckedUpdateWithoutAuthorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nick?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNumber?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
@@ -501,6 +578,7 @@ export type IdeaUncheckedUpdateWithoutAuthorInput = {
 export type IdeaUncheckedUpdateManyWithoutAuthorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nick?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNumber?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
@@ -512,6 +590,7 @@ export type IdeaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
     {
       id?: boolean
       nick?: boolean
+      serialNumber?: boolean
       name?: boolean
       description?: boolean
       text?: boolean
@@ -528,6 +607,7 @@ export type IdeaSelectCreateManyAndReturn<
   {
     id?: boolean
     nick?: boolean
+    serialNumber?: boolean
     name?: boolean
     description?: boolean
     text?: boolean
@@ -544,6 +624,7 @@ export type IdeaSelectUpdateManyAndReturn<
   {
     id?: boolean
     nick?: boolean
+    serialNumber?: boolean
     name?: boolean
     description?: boolean
     text?: boolean
@@ -557,6 +638,7 @@ export type IdeaSelectUpdateManyAndReturn<
 export type IdeaSelectScalar = {
   id?: boolean
   nick?: boolean
+  serialNumber?: boolean
   name?: boolean
   description?: boolean
   text?: boolean
@@ -566,7 +648,7 @@ export type IdeaSelectScalar = {
 
 export type IdeaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
   runtime.Types.Extensions.GetOmit<
-    'id' | 'nick' | 'name' | 'description' | 'text' | 'createdAt' | 'authorId',
+    'id' | 'nick' | 'serialNumber' | 'name' | 'description' | 'text' | 'createdAt' | 'authorId',
     ExtArgs['result']['idea']
   >
 export type IdeaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
@@ -594,6 +676,7 @@ export type $IdeaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
       {
         id: string
         nick: string
+        serialNumber: number
         name: string
         description: string
         text: string
@@ -1117,6 +1200,7 @@ export interface Prisma__IdeaClient<
 export interface IdeaFieldRefs {
   readonly id: Prisma.FieldRef<'Idea', 'String'>
   readonly nick: Prisma.FieldRef<'Idea', 'String'>
+  readonly serialNumber: Prisma.FieldRef<'Idea', 'Int'>
   readonly name: Prisma.FieldRef<'Idea', 'String'>
   readonly description: Prisma.FieldRef<'Idea', 'String'>
   readonly text: Prisma.FieldRef<'Idea', 'String'>
