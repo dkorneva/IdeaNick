@@ -15,7 +15,7 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
   const { data, error, isLoading, isFetching, isError } = trpc.getMe.useQuery()
   return (
     <AppReactContext.Provider value={{ me: data?.me || null }}>
-      {isLoading || isFetching ? <p>Lodaing...</p> : isError ? <p>Error: {error.message}</p> : children}
+      {isLoading || isFetching ? <p>Loading...</p> : isError ? <p>Error: {error.message}</p> : children}
     </AppReactContext.Provider>
   )
 }

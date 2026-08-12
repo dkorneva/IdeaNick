@@ -18,7 +18,9 @@ export const getSignUpRoute = () => '/sign-up'
 
 export const getSignInRoute = () => '/sign-in'
 
-export const getSignOutRoute = () => 'sign-out'
+export const getSignOutRoute = () => '/sign-out'
+
+export const getEditProfileRoute = () => '/edit-profile'
 
 // export const viewIdeaRouteParams = { ideaNick: ':ideaNick' }
 // export type ViewIdeaRouteParams = { ideaNick: string }
