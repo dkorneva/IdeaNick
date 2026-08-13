@@ -81,6 +81,7 @@ export const ViewIdeaPage = withPageWrapper({
     me: ctx.me,
   }),
   showLoaderOnFetching: false,
+  title: ({ idea }) => idea.name,
 })(({ idea, me }) => {
   return (
     <Segment title={idea.name} description={idea.description}>
