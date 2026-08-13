@@ -3,7 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "ts-node-dev --watch ./.env --rs --exit-child ./src/index.ts",
+    "dev": "ts-node-dev --watch ./src/emails/dist,./.env --rs --exit-child ./src/index.ts",
+    "build-emails": "rimraf ./src/emails/dist && node -e \"require('fs').mkdirSync('./src/emails/dist',{recursive:true})\" && mjml --config.allowIncludes true \"./src/emails/[!_]*.mjml\" -o ./src/emails/dist",
+    "watch-emails": "node -e \"require('fs').mkdirSync('./src/emails/dist',{recursive:true})\" && mjml --config.allowIncludes true -w \"./src/emails/[!_]*.mjml\" -o ./src/emails/dist",
     "build": "rimraf ./dist && tsc --build ./tsconfig.json",
     "start": "node ./dist/index.js",
     "lint": "..\\node_modules\\.bin\\eslint.cmd --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts .",

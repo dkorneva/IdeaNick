@@ -1,5 +1,6 @@
 {
   "eslint.workingDirectories": ["backend", "webapp"],
   "stylelint.validate": ["css", "scss"],
-  "stylelint.workingDirectories": ["webapp"]
+  "stylelint.workingDirectories": ["webapp"],
+  "mjml.allowIncludes": true
 }
