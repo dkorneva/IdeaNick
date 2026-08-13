@@ -8,5 +8,9 @@
  * 🟢 You can import this file directly.
  */
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const UserPermission = {
+  BLOCK_IDEAS: 'BLOCK_IDEAS',
+  ALL: 'ALL',
+} as const
+
+export type UserPermission = (typeof UserPermission)[keyof typeof UserPermission]

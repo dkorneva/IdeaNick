@@ -28,7 +28,7 @@ export default [
       },
     },
     rules: {
-      'react/react-in-jsx-scope': 'off', // React 17+ не требует импортировать React
+      'react/react-in-jsx-scope': 'off', // React 17+ does not require importing React.
       'no-restricted-syntax': [
         'error',
         {
@@ -40,11 +40,16 @@ export default [
       '@typescript-eslint/no-restricted-imports': [
         'error',
         {
-          // Запрещаем импорт всего из @ideanick/backend, кроме /input
+          // Restrict backend imports to input files and utils/can.
           patterns: [
             {
-              regex: '^@ideanick/backend/(?!(.*/)?input$).+$',
-              message: 'Импорт из бэкенда разрешен только для файлов input',
+              group: [
+                '@IdeaNick/backend/**',
+                '!@IdeaNick/backend/**/',
+                '!@IdeaNick/backend/**/input',
+                '!@IdeaNick/backend/src/utils/can',
+              ],
+              message: 'Backend imports are allowed only for input files and utils/can',
             },
           ],
         },
@@ -56,7 +61,7 @@ export default [
     ignores: ['dist', 'node_modules', 'coverage', 'eslint.config.js'],
   },
 
-  //   🔹 Специальные настройки для Vite-конфига
+  // Special settings for the Vite config.
   {
     files: ['./vite.config.ts'],
     languageOptions: {

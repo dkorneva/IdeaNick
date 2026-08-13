@@ -671,6 +671,7 @@ export const UserScalarFieldEnum = {
   name: 'name',
   password: 'password',
   createdAt: 'createdAt',
+  permissions: 'permissions',
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -684,6 +685,7 @@ export const IdeaScalarFieldEnum = {
   text: 'text',
   createdAt: 'createdAt',
   authorId: 'authorId',
+  blockedAt: 'blockedAt',
 } as const
 
 export type IdeaScalarFieldEnum = (typeof IdeaScalarFieldEnum)[keyof typeof IdeaScalarFieldEnum]
@@ -720,6 +722,13 @@ export const UserOrderByRelevanceFieldEnum = {
 
 export type UserOrderByRelevanceFieldEnum =
   (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last',
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 export const IdeaOrderByRelevanceFieldEnum = {
   id: 'id',
@@ -765,6 +774,16 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+
+/**
+ * Reference to a field of type 'UserPermission[]'
+ */
+export type ListEnumUserPermissionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserPermission[]'>
+
+/**
+ * Reference to a field of type 'UserPermission'
+ */
+export type EnumUserPermissionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserPermission'>
 
 /**
  * Reference to a field of type 'Int'

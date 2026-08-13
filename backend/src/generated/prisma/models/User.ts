@@ -45,6 +45,7 @@ export type UserCountAggregateOutputType = {
   name: number
   password: number
   createdAt: number
+  permissions: number
   _all: number
 }
 
@@ -70,6 +71,7 @@ export type UserCountAggregateInputType = {
   name?: true
   password?: true
   createdAt?: true
+  permissions?: true
   _all?: true
 }
 
@@ -152,6 +154,7 @@ export type UserGroupByOutputType = {
   name: string
   password: string
   createdAt: Date
+  permissions: $Enums.UserPermission[]
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -178,6 +181,7 @@ export type UserWhereInput = {
   name?: Prisma.StringFilter<'User'> | string
   password?: Prisma.StringFilter<'User'> | string
   createdAt?: Prisma.DateTimeFilter<'User'> | Date | string
+  permissions?: Prisma.EnumUserPermissionNullableListFilter<'User'>
   Ideas?: Prisma.IdeaListRelationFilter
   ideasLikes?: Prisma.IdeaLikeListRelationFilter
 }
@@ -188,6 +192,7 @@ export type UserOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   password?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  permissions?: Prisma.SortOrder
   Ideas?: Prisma.IdeaOrderByRelationAggregateInput
   ideasLikes?: Prisma.IdeaLikeOrderByRelationAggregateInput
   _relevance?: Prisma.UserOrderByRelevanceInput
@@ -203,6 +208,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<
     name?: Prisma.StringFilter<'User'> | string
     password?: Prisma.StringFilter<'User'> | string
     createdAt?: Prisma.DateTimeFilter<'User'> | Date | string
+    permissions?: Prisma.EnumUserPermissionNullableListFilter<'User'>
     Ideas?: Prisma.IdeaListRelationFilter
     ideasLikes?: Prisma.IdeaLikeListRelationFilter
   },
@@ -215,6 +221,7 @@ export type UserOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   password?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  permissions?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -229,6 +236,7 @@ export type UserScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<'User'> | string
   password?: Prisma.StringWithAggregatesFilter<'User'> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<'User'> | Date | string
+  permissions?: Prisma.EnumUserPermissionNullableListFilter<'User'>
 }
 
 export type UserCreateInput = {
@@ -237,6 +245,7 @@ export type UserCreateInput = {
   name?: string
   password: string
   createdAt?: Date | string
+  permissions?: Prisma.UserCreatepermissionsInput | $Enums.UserPermission[]
   Ideas?: Prisma.IdeaCreateNestedManyWithoutAuthorInput
   ideasLikes?: Prisma.IdeaLikeCreateNestedManyWithoutUserInput
 }
@@ -247,6 +256,7 @@ export type UserUncheckedCreateInput = {
   name?: string
   password: string
   createdAt?: Date | string
+  permissions?: Prisma.UserCreatepermissionsInput | $Enums.UserPermission[]
   Ideas?: Prisma.IdeaUncheckedCreateNestedManyWithoutAuthorInput
   ideasLikes?: Prisma.IdeaLikeUncheckedCreateNestedManyWithoutUserInput
 }
@@ -257,6 +267,7 @@ export type UserUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  permissions?: Prisma.UserUpdatepermissionsInput | $Enums.UserPermission[]
   Ideas?: Prisma.IdeaUpdateManyWithoutAuthorNestedInput
   ideasLikes?: Prisma.IdeaLikeUpdateManyWithoutUserNestedInput
 }
@@ -267,6 +278,7 @@ export type UserUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  permissions?: Prisma.UserUpdatepermissionsInput | $Enums.UserPermission[]
   Ideas?: Prisma.IdeaUncheckedUpdateManyWithoutAuthorNestedInput
   ideasLikes?: Prisma.IdeaLikeUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -277,6 +289,7 @@ export type UserCreateManyInput = {
   name?: string
   password: string
   createdAt?: Date | string
+  permissions?: Prisma.UserCreatepermissionsInput | $Enums.UserPermission[]
 }
 
 export type UserUpdateManyMutationInput = {
@@ -285,6 +298,7 @@ export type UserUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  permissions?: Prisma.UserUpdatepermissionsInput | $Enums.UserPermission[]
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -293,6 +307,15 @@ export type UserUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  permissions?: Prisma.UserUpdatepermissionsInput | $Enums.UserPermission[]
+}
+
+export type EnumUserPermissionNullableListFilter<$PrismaModel = never> = {
+  equals?: $Enums.UserPermission[] | Prisma.ListEnumUserPermissionFieldRefInput<$PrismaModel> | null
+  has?: $Enums.UserPermission | Prisma.EnumUserPermissionFieldRefInput<$PrismaModel> | null
+  hasEvery?: $Enums.UserPermission[] | Prisma.ListEnumUserPermissionFieldRefInput<$PrismaModel>
+  hasSome?: $Enums.UserPermission[] | Prisma.ListEnumUserPermissionFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
 }
 
 export type UserOrderByRelevanceInput = {
@@ -307,6 +330,7 @@ export type UserCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   password?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  permissions?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -330,12 +354,21 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserCreatepermissionsInput = {
+  set: $Enums.UserPermission[]
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type UserUpdatepermissionsInput = {
+  set?: $Enums.UserPermission[]
+  push?: $Enums.UserPermission | $Enums.UserPermission[]
 }
 
 export type UserCreateNestedOneWithoutIdeasInput = {
@@ -378,6 +411,7 @@ export type UserCreateWithoutIdeasInput = {
   name?: string
   password: string
   createdAt?: Date | string
+  permissions?: Prisma.UserCreatepermissionsInput | $Enums.UserPermission[]
   ideasLikes?: Prisma.IdeaLikeCreateNestedManyWithoutUserInput
 }
 
@@ -387,6 +421,7 @@ export type UserUncheckedCreateWithoutIdeasInput = {
   name?: string
   password: string
   createdAt?: Date | string
+  permissions?: Prisma.UserCreatepermissionsInput | $Enums.UserPermission[]
   ideasLikes?: Prisma.IdeaLikeUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -412,6 +447,7 @@ export type UserUpdateWithoutIdeasInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  permissions?: Prisma.UserUpdatepermissionsInput | $Enums.UserPermission[]
   ideasLikes?: Prisma.IdeaLikeUpdateManyWithoutUserNestedInput
 }
 
@@ -421,6 +457,7 @@ export type UserUncheckedUpdateWithoutIdeasInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  permissions?: Prisma.UserUpdatepermissionsInput | $Enums.UserPermission[]
   ideasLikes?: Prisma.IdeaLikeUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -430,6 +467,7 @@ export type UserCreateWithoutIdeasLikesInput = {
   name?: string
   password: string
   createdAt?: Date | string
+  permissions?: Prisma.UserCreatepermissionsInput | $Enums.UserPermission[]
   Ideas?: Prisma.IdeaCreateNestedManyWithoutAuthorInput
 }
 
@@ -439,6 +477,7 @@ export type UserUncheckedCreateWithoutIdeasLikesInput = {
   name?: string
   password: string
   createdAt?: Date | string
+  permissions?: Prisma.UserCreatepermissionsInput | $Enums.UserPermission[]
   Ideas?: Prisma.IdeaUncheckedCreateNestedManyWithoutAuthorInput
 }
 
@@ -464,6 +503,7 @@ export type UserUpdateWithoutIdeasLikesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  permissions?: Prisma.UserUpdatepermissionsInput | $Enums.UserPermission[]
   Ideas?: Prisma.IdeaUpdateManyWithoutAuthorNestedInput
 }
 
@@ -473,6 +513,7 @@ export type UserUncheckedUpdateWithoutIdeasLikesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  permissions?: Prisma.UserUpdatepermissionsInput | $Enums.UserPermission[]
   Ideas?: Prisma.IdeaUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
@@ -530,6 +571,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
       name?: boolean
       password?: boolean
       createdAt?: boolean
+      permissions?: boolean
       Ideas?: boolean | Prisma.User$IdeasArgs<ExtArgs>
       ideasLikes?: boolean | Prisma.User$ideasLikesArgs<ExtArgs>
       _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -546,6 +588,7 @@ export type UserSelectCreateManyAndReturn<
     name?: boolean
     password?: boolean
     createdAt?: boolean
+    permissions?: boolean
   },
   ExtArgs['result']['user']
 >
@@ -559,6 +602,7 @@ export type UserSelectUpdateManyAndReturn<
     name?: boolean
     password?: boolean
     createdAt?: boolean
+    permissions?: boolean
   },
   ExtArgs['result']['user']
 >
@@ -569,10 +613,14 @@ export type UserSelectScalar = {
   name?: boolean
   password?: boolean
   createdAt?: boolean
+  permissions?: boolean
 }
 
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
-  runtime.Types.Extensions.GetOmit<'id' | 'nick' | 'name' | 'password' | 'createdAt', ExtArgs['result']['user']>
+  runtime.Types.Extensions.GetOmit<
+    'id' | 'nick' | 'name' | 'password' | 'createdAt' | 'permissions',
+    ExtArgs['result']['user']
+  >
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
   {
     Ideas?: boolean | Prisma.User$IdeasArgs<ExtArgs>
@@ -600,6 +648,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
         name: string
         password: string
         createdAt: Date
+        permissions: $Enums.UserPermission[]
       },
       ExtArgs['result']['user']
     >
@@ -1123,6 +1172,7 @@ export interface UserFieldRefs {
   readonly name: Prisma.FieldRef<'User', 'String'>
   readonly password: Prisma.FieldRef<'User', 'String'>
   readonly createdAt: Prisma.FieldRef<'User', 'DateTime'>
+  readonly permissions: Prisma.FieldRef<'User', 'UserPermission[]'>
 }
 
 // Custom InputTypes

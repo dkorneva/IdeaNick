@@ -16,6 +16,12 @@ model User {
   createdAt DateTime @default(now())
   Ideas     Idea[]
   ideasLikes IdeaLike[]
+  permissions UserPermission[]
+}
+
+enum UserPermission {
+  BLOCK_IDEAS
+  ALL
 }
 
 model Idea {
@@ -29,6 +35,7 @@ model Idea {
   authorId    String
   author      User     @relation(fields: [authorId], references: [id])
   ideasLikes IdeaLike[]
+  blockedAt DateTime?
 }
 
 model IdeaLike {
