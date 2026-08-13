@@ -711,6 +711,37 @@ export const QueryMode = {
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
+export const UserOrderByRelevanceFieldEnum = {
+  id: 'id',
+  nick: 'nick',
+  name: 'name',
+  password: 'password',
+} as const
+
+export type UserOrderByRelevanceFieldEnum =
+  (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
+
+export const IdeaOrderByRelevanceFieldEnum = {
+  id: 'id',
+  nick: 'nick',
+  name: 'name',
+  description: 'description',
+  text: 'text',
+  authorId: 'authorId',
+} as const
+
+export type IdeaOrderByRelevanceFieldEnum =
+  (typeof IdeaOrderByRelevanceFieldEnum)[keyof typeof IdeaOrderByRelevanceFieldEnum]
+
+export const IdeaLikeOrderByRelevanceFieldEnum = {
+  id: 'id',
+  ideaId: 'ideaId',
+  userId: 'userId',
+} as const
+
+export type IdeaLikeOrderByRelevanceFieldEnum =
+  (typeof IdeaLikeOrderByRelevanceFieldEnum)[keyof typeof IdeaLikeOrderByRelevanceFieldEnum]
+
 /**
  * Field references
  */

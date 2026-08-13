@@ -251,6 +251,7 @@ export type IdeaOrderByWithRelationInput = {
   authorId?: Prisma.SortOrder
   author?: Prisma.UserOrderByWithRelationInput
   ideasLikes?: Prisma.IdeaLikeOrderByRelationAggregateInput
+  _relevance?: Prisma.IdeaOrderByRelevanceInput
 }
 
 export type IdeaWhereUniqueInput = Prisma.AtLeast<
@@ -388,6 +389,12 @@ export type IdeaListRelationFilter = {
 
 export type IdeaOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type IdeaOrderByRelevanceInput = {
+  fields: Prisma.IdeaOrderByRelevanceFieldEnum | Prisma.IdeaOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type IdeaCountOrderByAggregateInput = {

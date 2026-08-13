@@ -8,6 +8,8 @@ import { zGetIdeasTrpcInput } from './input'
 
 // в query передаём ту функцию, которая должна быть вызвана, когда мы запросим её с фронта
 export const getIdeasTrpcRoute = trpc.procedure.input(zGetIdeasTrpcInput).query(async ({ ctx, input }) => {
+  // const normalizedSearch = input.search ? input.search.trim().replace(/[\s\n\t]/g, '_') : undefined
+  const normalizedSearch = input.search ? input.search.trim().replace(/[\s\n\t]/g, ' & ') : undefined
   const rawIdeas = await ctx.prisma.idea.findMany({
     select: {
       id: true,
@@ -22,6 +24,27 @@ export const getIdeasTrpcRoute = trpc.procedure.input(zGetIdeasTrpcInput).query(
         },
       },
     },
+    where: !input.search
+      ? undefined
+      : {
+          OR: [
+            {
+              name: {
+                search: normalizedSearch,
+              },
+            },
+            {
+              description: {
+                search: normalizedSearch,
+              },
+            },
+            {
+              text: {
+                search: normalizedSearch,
+              },
+            },
+          ],
+        },
     orderBy: [
       {
         createdAt: 'desc',
