@@ -50,6 +50,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Idea: 'Idea',
+  IdeaLike: 'IdeaLike',
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -89,6 +90,15 @@ export const IdeaScalarFieldEnum = {
 } as const
 
 export type IdeaScalarFieldEnum = (typeof IdeaScalarFieldEnum)[keyof typeof IdeaScalarFieldEnum]
+
+export const IdeaLikeScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  ideaId: 'ideaId',
+  userId: 'userId',
+} as const
+
+export type IdeaLikeScalarFieldEnum = (typeof IdeaLikeScalarFieldEnum)[keyof typeof IdeaLikeScalarFieldEnum]
 
 export const SortOrder = {
   asc: 'asc',

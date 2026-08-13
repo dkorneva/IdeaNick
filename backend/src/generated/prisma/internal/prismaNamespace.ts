@@ -381,6 +381,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   Idea: 'Idea',
+  IdeaLike: 'IdeaLike',
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -400,7 +401,7 @@ export type TypeMap<
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: 'user' | 'idea'
+    modelProps: 'user' | 'idea' | 'ideaLike'
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -552,6 +553,80 @@ export type TypeMap<
         }
       }
     }
+    IdeaLike: {
+      payload: Prisma.$IdeaLikePayload<ExtArgs>
+      fields: Prisma.IdeaLikeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.IdeaLikeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdeaLikePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.IdeaLikeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdeaLikePayload>
+        }
+        findFirst: {
+          args: Prisma.IdeaLikeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdeaLikePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.IdeaLikeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdeaLikePayload>
+        }
+        findMany: {
+          args: Prisma.IdeaLikeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdeaLikePayload>[]
+        }
+        create: {
+          args: Prisma.IdeaLikeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdeaLikePayload>
+        }
+        createMany: {
+          args: Prisma.IdeaLikeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.IdeaLikeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdeaLikePayload>[]
+        }
+        delete: {
+          args: Prisma.IdeaLikeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdeaLikePayload>
+        }
+        update: {
+          args: Prisma.IdeaLikeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdeaLikePayload>
+        }
+        deleteMany: {
+          args: Prisma.IdeaLikeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.IdeaLikeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.IdeaLikeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdeaLikePayload>[]
+        }
+        upsert: {
+          args: Prisma.IdeaLikeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$IdeaLikePayload>
+        }
+        aggregate: {
+          args: Prisma.IdeaLikeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateIdeaLike>
+        }
+        groupBy: {
+          args: Prisma.IdeaLikeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IdeaLikeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.IdeaLikeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.IdeaLikeCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -612,6 +687,15 @@ export const IdeaScalarFieldEnum = {
 } as const
 
 export type IdeaScalarFieldEnum = (typeof IdeaScalarFieldEnum)[keyof typeof IdeaScalarFieldEnum]
+
+export const IdeaLikeScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  ideaId: 'ideaId',
+  userId: 'userId',
+} as const
+
+export type IdeaLikeScalarFieldEnum = (typeof IdeaLikeScalarFieldEnum)[keyof typeof IdeaLikeScalarFieldEnum]
 
 export const SortOrder = {
   asc: 'asc',
@@ -828,6 +912,7 @@ export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaC
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   idea?: Prisma.IdeaOmit
+  ideaLike?: Prisma.IdeaLikeOmit
 }
 
 /* Types for Logging */

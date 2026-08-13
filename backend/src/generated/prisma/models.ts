@@ -9,4 +9,5 @@
  */
 export type * from './models/User'
 export type * from './models/Idea'
+export type * from './models/IdeaLike'
 export type * from './commonInputTypes'

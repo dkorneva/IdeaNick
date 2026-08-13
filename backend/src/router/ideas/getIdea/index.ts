@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { z } from 'zod'
 import { trpc } from '../../../lib/trpc'
 
@@ -13,7 +14,7 @@ export const getIdeaTrpcRoute = trpc.procedure
     })
   )
   .query(async ({ ctx, input }) => {
-    const idea = await ctx.prisma.idea.findUnique({
+    const rawIdea = await ctx.prisma.idea.findUnique({
       where: {
         nick: input.ideaNick,
       },
@@ -25,8 +26,28 @@ export const getIdeaTrpcRoute = trpc.procedure
             name: true,
           },
         },
+        // запрашиваем связаннные ideasLikes, запрашиваем id, ищем только те, где userId === ctx.me.id (наш id текущего пользователя)
+
+        // название поля (ideasLikes) определяется названием связи в schema.prisma
+        ideasLikes: {
+          select: {
+            id: true,
+          },
+          where: {
+            userId: ctx.me?.id,
+          },
+        },
+        // суммарное количество лайков у идеи, выбираем, что будем считать ideasLikes
+        _count: {
+          select: {
+            ideasLikes: true,
+          },
+        },
       },
     })
+    const isLikedByMe = !!rawIdea?.ideasLikes.length
+    const likesCount = rawIdea?._count.ideasLikes || 0
+    const idea = rawIdea && { ..._.omit(rawIdea, ['ideasLikes', '_count']), isLikedByMe, likesCount }
 
     return { idea }
   })

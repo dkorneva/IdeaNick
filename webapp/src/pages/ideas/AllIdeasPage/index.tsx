@@ -63,7 +63,9 @@ export const AllIdeasPage = () => {
                       </Link>
                     }
                     description={idea.description}
-                  ></Segment>
+                  >
+                    Likes: {idea.likesCount}
+                  </Segment>
                 </div>
               ))}
           </InfiniteScroll>

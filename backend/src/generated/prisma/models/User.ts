@@ -179,6 +179,7 @@ export type UserWhereInput = {
   password?: Prisma.StringFilter<'User'> | string
   createdAt?: Prisma.DateTimeFilter<'User'> | Date | string
   Ideas?: Prisma.IdeaListRelationFilter
+  ideasLikes?: Prisma.IdeaLikeListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -188,6 +189,7 @@ export type UserOrderByWithRelationInput = {
   password?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   Ideas?: Prisma.IdeaOrderByRelationAggregateInput
+  ideasLikes?: Prisma.IdeaLikeOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<
@@ -201,6 +203,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<
     password?: Prisma.StringFilter<'User'> | string
     createdAt?: Prisma.DateTimeFilter<'User'> | Date | string
     Ideas?: Prisma.IdeaListRelationFilter
+    ideasLikes?: Prisma.IdeaLikeListRelationFilter
   },
   'id' | 'nick'
 >
@@ -234,6 +237,7 @@ export type UserCreateInput = {
   password: string
   createdAt?: Date | string
   Ideas?: Prisma.IdeaCreateNestedManyWithoutAuthorInput
+  ideasLikes?: Prisma.IdeaLikeCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -243,6 +247,7 @@ export type UserUncheckedCreateInput = {
   password: string
   createdAt?: Date | string
   Ideas?: Prisma.IdeaUncheckedCreateNestedManyWithoutAuthorInput
+  ideasLikes?: Prisma.IdeaLikeUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -252,6 +257,7 @@ export type UserUpdateInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Ideas?: Prisma.IdeaUpdateManyWithoutAuthorNestedInput
+  ideasLikes?: Prisma.IdeaLikeUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -261,6 +267,7 @@ export type UserUncheckedUpdateInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Ideas?: Prisma.IdeaUncheckedUpdateManyWithoutAuthorNestedInput
+  ideasLikes?: Prisma.IdeaLikeUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -341,12 +348,30 @@ export type UserUpdateOneRequiredWithoutIdeasNestedInput = {
   >
 }
 
+export type UserCreateNestedOneWithoutIdeasLikesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIdeasLikesInput, Prisma.UserUncheckedCreateWithoutIdeasLikesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIdeasLikesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutIdeasLikesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIdeasLikesInput, Prisma.UserUncheckedCreateWithoutIdeasLikesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIdeasLikesInput
+  upsert?: Prisma.UserUpsertWithoutIdeasLikesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<
+    Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutIdeasLikesInput, Prisma.UserUpdateWithoutIdeasLikesInput>,
+    Prisma.UserUncheckedUpdateWithoutIdeasLikesInput
+  >
+}
+
 export type UserCreateWithoutIdeasInput = {
   id?: string
   nick: string
   name?: string
   password: string
   createdAt?: Date | string
+  ideasLikes?: Prisma.IdeaLikeCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutIdeasInput = {
@@ -355,6 +380,7 @@ export type UserUncheckedCreateWithoutIdeasInput = {
   name?: string
   password: string
   createdAt?: Date | string
+  ideasLikes?: Prisma.IdeaLikeUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutIdeasInput = {
@@ -379,6 +405,7 @@ export type UserUpdateWithoutIdeasInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ideasLikes?: Prisma.IdeaLikeUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutIdeasInput = {
@@ -387,6 +414,59 @@ export type UserUncheckedUpdateWithoutIdeasInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ideasLikes?: Prisma.IdeaLikeUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutIdeasLikesInput = {
+  id?: string
+  nick: string
+  name?: string
+  password: string
+  createdAt?: Date | string
+  Ideas?: Prisma.IdeaCreateNestedManyWithoutAuthorInput
+}
+
+export type UserUncheckedCreateWithoutIdeasLikesInput = {
+  id?: string
+  nick: string
+  name?: string
+  password: string
+  createdAt?: Date | string
+  Ideas?: Prisma.IdeaUncheckedCreateNestedManyWithoutAuthorInput
+}
+
+export type UserCreateOrConnectWithoutIdeasLikesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutIdeasLikesInput, Prisma.UserUncheckedCreateWithoutIdeasLikesInput>
+}
+
+export type UserUpsertWithoutIdeasLikesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutIdeasLikesInput, Prisma.UserUncheckedUpdateWithoutIdeasLikesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutIdeasLikesInput, Prisma.UserUncheckedCreateWithoutIdeasLikesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutIdeasLikesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutIdeasLikesInput, Prisma.UserUncheckedUpdateWithoutIdeasLikesInput>
+}
+
+export type UserUpdateWithoutIdeasLikesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nick?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Ideas?: Prisma.IdeaUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutIdeasLikesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nick?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  Ideas?: Prisma.IdeaUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 /**
@@ -395,12 +475,14 @@ export type UserUncheckedUpdateWithoutIdeasInput = {
 
 export type UserCountOutputType = {
   Ideas: number
+  ideasLikes: number
 }
 
 export type UserCountOutputTypeSelect<
   ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
   Ideas?: boolean | UserCountOutputTypeCountIdeasArgs
+  ideasLikes?: boolean | UserCountOutputTypeCountIdeasLikesArgs
 }
 
 /**
@@ -424,6 +506,15 @@ export type UserCountOutputTypeCountIdeasArgs<
   where?: Prisma.IdeaWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountIdeasLikesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.IdeaLikeWhereInput
+}
+
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
   runtime.Types.Extensions.GetSelect<
     {
@@ -433,6 +524,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
       password?: boolean
       createdAt?: boolean
       Ideas?: boolean | Prisma.User$IdeasArgs<ExtArgs>
+      ideasLikes?: boolean | Prisma.User$ideasLikesArgs<ExtArgs>
       _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
     },
     ExtArgs['result']['user']
@@ -477,6 +569,7 @@ export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
   {
     Ideas?: boolean | Prisma.User$IdeasArgs<ExtArgs>
+    ideasLikes?: boolean | Prisma.User$ideasLikesArgs<ExtArgs>
     _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 export type UserIncludeCreateManyAndReturn<
@@ -491,6 +584,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     name: 'User'
     objects: {
       Ideas: Prisma.$IdeaPayload<ExtArgs>[]
+      ideasLikes: Prisma.$IdeaLikePayload<ExtArgs>[]
     }
     scalars: runtime.Types.Extensions.GetPayloadResult<
       {
@@ -981,6 +1075,11 @@ export interface Prisma__UserClient<
   ): Prisma.PrismaPromise<
     runtime.Types.Result.GetResult<Prisma.$IdeaPayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
   >
+  ideasLikes<T extends Prisma.User$ideasLikesArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$ideasLikesArgs<ExtArgs>>
+  ): Prisma.PrismaPromise<
+    runtime.Types.Result.GetResult<Prisma.$IdeaLikePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
+  >
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1460,6 +1559,32 @@ export type User$IdeasArgs<
   take?: number
   skip?: number
   distinct?: Prisma.IdeaScalarFieldEnum | Prisma.IdeaScalarFieldEnum[]
+}
+
+/**
+ * User.ideasLikes
+ */
+export type User$ideasLikesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the IdeaLike
+   */
+  select?: Prisma.IdeaLikeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the IdeaLike
+   */
+  omit?: Prisma.IdeaLikeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IdeaLikeInclude<ExtArgs> | null
+  where?: Prisma.IdeaLikeWhereInput
+  orderBy?: Prisma.IdeaLikeOrderByWithRelationInput | Prisma.IdeaLikeOrderByWithRelationInput[]
+  cursor?: Prisma.IdeaLikeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.IdeaLikeScalarFieldEnum | Prisma.IdeaLikeScalarFieldEnum[]
 }
 
 /**

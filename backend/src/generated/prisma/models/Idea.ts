@@ -237,6 +237,7 @@ export type IdeaWhereInput = {
   createdAt?: Prisma.DateTimeFilter<'Idea'> | Date | string
   authorId?: Prisma.StringFilter<'Idea'> | string
   author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  ideasLikes?: Prisma.IdeaLikeListRelationFilter
 }
 
 export type IdeaOrderByWithRelationInput = {
@@ -249,6 +250,7 @@ export type IdeaOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   author?: Prisma.UserOrderByWithRelationInput
+  ideasLikes?: Prisma.IdeaLikeOrderByRelationAggregateInput
 }
 
 export type IdeaWhereUniqueInput = Prisma.AtLeast<
@@ -265,6 +267,7 @@ export type IdeaWhereUniqueInput = Prisma.AtLeast<
     createdAt?: Prisma.DateTimeFilter<'Idea'> | Date | string
     authorId?: Prisma.StringFilter<'Idea'> | string
     author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+    ideasLikes?: Prisma.IdeaLikeListRelationFilter
   },
   'id' | 'nick' | 'serialNumber'
 >
@@ -308,6 +311,7 @@ export type IdeaCreateInput = {
   text: string
   createdAt?: Date | string
   author: Prisma.UserCreateNestedOneWithoutIdeasInput
+  ideasLikes?: Prisma.IdeaLikeCreateNestedManyWithoutIdeaInput
 }
 
 export type IdeaUncheckedCreateInput = {
@@ -319,6 +323,7 @@ export type IdeaUncheckedCreateInput = {
   text: string
   createdAt?: Date | string
   authorId: string
+  ideasLikes?: Prisma.IdeaLikeUncheckedCreateNestedManyWithoutIdeaInput
 }
 
 export type IdeaUpdateInput = {
@@ -329,6 +334,7 @@ export type IdeaUpdateInput = {
   text?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   author?: Prisma.UserUpdateOneRequiredWithoutIdeasNestedInput
+  ideasLikes?: Prisma.IdeaLikeUpdateManyWithoutIdeaNestedInput
 }
 
 export type IdeaUncheckedUpdateInput = {
@@ -340,6 +346,7 @@ export type IdeaUncheckedUpdateInput = {
   text?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  ideasLikes?: Prisma.IdeaLikeUncheckedUpdateManyWithoutIdeaNestedInput
 }
 
 export type IdeaCreateManyInput = {
@@ -424,6 +431,11 @@ export type IdeaSumOrderByAggregateInput = {
   serialNumber?: Prisma.SortOrder
 }
 
+export type IdeaScalarRelationFilter = {
+  is?: Prisma.IdeaWhereInput
+  isNot?: Prisma.IdeaWhereInput
+}
+
 export type IdeaCreateNestedManyWithoutAuthorInput = {
   create?:
     | Prisma.XOR<Prisma.IdeaCreateWithoutAuthorInput, Prisma.IdeaUncheckedCreateWithoutAuthorInput>
@@ -486,6 +498,23 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type IdeaCreateNestedOneWithoutIdeasLikesInput = {
+  create?: Prisma.XOR<Prisma.IdeaCreateWithoutIdeasLikesInput, Prisma.IdeaUncheckedCreateWithoutIdeasLikesInput>
+  connectOrCreate?: Prisma.IdeaCreateOrConnectWithoutIdeasLikesInput
+  connect?: Prisma.IdeaWhereUniqueInput
+}
+
+export type IdeaUpdateOneRequiredWithoutIdeasLikesNestedInput = {
+  create?: Prisma.XOR<Prisma.IdeaCreateWithoutIdeasLikesInput, Prisma.IdeaUncheckedCreateWithoutIdeasLikesInput>
+  connectOrCreate?: Prisma.IdeaCreateOrConnectWithoutIdeasLikesInput
+  upsert?: Prisma.IdeaUpsertWithoutIdeasLikesInput
+  connect?: Prisma.IdeaWhereUniqueInput
+  update?: Prisma.XOR<
+    Prisma.XOR<Prisma.IdeaUpdateToOneWithWhereWithoutIdeasLikesInput, Prisma.IdeaUpdateWithoutIdeasLikesInput>,
+    Prisma.IdeaUncheckedUpdateWithoutIdeasLikesInput
+  >
+}
+
 export type IdeaCreateWithoutAuthorInput = {
   id?: string
   nick: string
@@ -494,6 +523,7 @@ export type IdeaCreateWithoutAuthorInput = {
   description: string
   text: string
   createdAt?: Date | string
+  ideasLikes?: Prisma.IdeaLikeCreateNestedManyWithoutIdeaInput
 }
 
 export type IdeaUncheckedCreateWithoutAuthorInput = {
@@ -504,6 +534,7 @@ export type IdeaUncheckedCreateWithoutAuthorInput = {
   description: string
   text: string
   createdAt?: Date | string
+  ideasLikes?: Prisma.IdeaLikeUncheckedCreateNestedManyWithoutIdeaInput
 }
 
 export type IdeaCreateOrConnectWithoutAuthorInput = {
@@ -546,6 +577,65 @@ export type IdeaScalarWhereInput = {
   authorId?: Prisma.StringFilter<'Idea'> | string
 }
 
+export type IdeaCreateWithoutIdeasLikesInput = {
+  id?: string
+  nick: string
+  serialNumber?: number
+  name: string
+  description: string
+  text: string
+  createdAt?: Date | string
+  author: Prisma.UserCreateNestedOneWithoutIdeasInput
+}
+
+export type IdeaUncheckedCreateWithoutIdeasLikesInput = {
+  id?: string
+  nick: string
+  serialNumber?: number
+  name: string
+  description: string
+  text: string
+  createdAt?: Date | string
+  authorId: string
+}
+
+export type IdeaCreateOrConnectWithoutIdeasLikesInput = {
+  where: Prisma.IdeaWhereUniqueInput
+  create: Prisma.XOR<Prisma.IdeaCreateWithoutIdeasLikesInput, Prisma.IdeaUncheckedCreateWithoutIdeasLikesInput>
+}
+
+export type IdeaUpsertWithoutIdeasLikesInput = {
+  update: Prisma.XOR<Prisma.IdeaUpdateWithoutIdeasLikesInput, Prisma.IdeaUncheckedUpdateWithoutIdeasLikesInput>
+  create: Prisma.XOR<Prisma.IdeaCreateWithoutIdeasLikesInput, Prisma.IdeaUncheckedCreateWithoutIdeasLikesInput>
+  where?: Prisma.IdeaWhereInput
+}
+
+export type IdeaUpdateToOneWithWhereWithoutIdeasLikesInput = {
+  where?: Prisma.IdeaWhereInput
+  data: Prisma.XOR<Prisma.IdeaUpdateWithoutIdeasLikesInput, Prisma.IdeaUncheckedUpdateWithoutIdeasLikesInput>
+}
+
+export type IdeaUpdateWithoutIdeasLikesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nick?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  text?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  author?: Prisma.UserUpdateOneRequiredWithoutIdeasNestedInput
+}
+
+export type IdeaUncheckedUpdateWithoutIdeasLikesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nick?: Prisma.StringFieldUpdateOperationsInput | string
+  serialNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  text?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
 export type IdeaCreateManyAuthorInput = {
   id?: string
   nick: string
@@ -563,6 +653,7 @@ export type IdeaUpdateWithoutAuthorInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ideasLikes?: Prisma.IdeaLikeUpdateManyWithoutIdeaNestedInput
 }
 
 export type IdeaUncheckedUpdateWithoutAuthorInput = {
@@ -573,6 +664,7 @@ export type IdeaUncheckedUpdateWithoutAuthorInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ideasLikes?: Prisma.IdeaLikeUncheckedUpdateManyWithoutIdeaNestedInput
 }
 
 export type IdeaUncheckedUpdateManyWithoutAuthorInput = {
@@ -583,6 +675,41 @@ export type IdeaUncheckedUpdateManyWithoutAuthorInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   text?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+/**
+ * Count Type IdeaCountOutputType
+ */
+
+export type IdeaCountOutputType = {
+  ideasLikes: number
+}
+
+export type IdeaCountOutputTypeSelect<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+  ideasLikes?: boolean | IdeaCountOutputTypeCountIdeasLikesArgs
+}
+
+/**
+ * IdeaCountOutputType without action
+ */
+export type IdeaCountOutputTypeDefaultArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the IdeaCountOutputType
+   */
+  select?: Prisma.IdeaCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * IdeaCountOutputType without action
+ */
+export type IdeaCountOutputTypeCountIdeasLikesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.IdeaLikeWhereInput
 }
 
 export type IdeaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
@@ -597,6 +724,8 @@ export type IdeaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
       createdAt?: boolean
       authorId?: boolean
       author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+      ideasLikes?: boolean | Prisma.Idea$ideasLikesArgs<ExtArgs>
+      _count?: boolean | Prisma.IdeaCountOutputTypeDefaultArgs<ExtArgs>
     },
     ExtArgs['result']['idea']
   >
@@ -654,6 +783,8 @@ export type IdeaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type IdeaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
   {
     author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+    ideasLikes?: boolean | Prisma.Idea$ideasLikesArgs<ExtArgs>
+    _count?: boolean | Prisma.IdeaCountOutputTypeDefaultArgs<ExtArgs>
   }
 export type IdeaIncludeCreateManyAndReturn<
   ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
@@ -671,6 +802,7 @@ export type $IdeaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     name: 'Idea'
     objects: {
       author: Prisma.$UserPayload<ExtArgs>
+      ideasLikes: Prisma.$IdeaLikePayload<ExtArgs>[]
     }
     scalars: runtime.Types.Extensions.GetPayloadResult<
       {
@@ -1167,6 +1299,11 @@ export interface Prisma__IdeaClient<
     ExtArgs,
     GlobalOmitOptions
   >
+  ideasLikes<T extends Prisma.Idea$ideasLikesArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.Idea$ideasLikesArgs<ExtArgs>>
+  ): Prisma.PrismaPromise<
+    runtime.Types.Result.GetResult<Prisma.$IdeaLikePayload<ExtArgs>, T, 'findMany', GlobalOmitOptions> | Null
+  >
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1631,6 +1768,32 @@ export type IdeaDeleteManyArgs<
    * Limit how many Ideas to delete.
    */
   limit?: number
+}
+
+/**
+ * Idea.ideasLikes
+ */
+export type Idea$ideasLikesArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the IdeaLike
+   */
+  select?: Prisma.IdeaLikeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the IdeaLike
+   */
+  omit?: Prisma.IdeaLikeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IdeaLikeInclude<ExtArgs> | null
+  where?: Prisma.IdeaLikeWhereInput
+  orderBy?: Prisma.IdeaLikeOrderByWithRelationInput | Prisma.IdeaLikeOrderByWithRelationInput[]
+  cursor?: Prisma.IdeaLikeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.IdeaLikeScalarFieldEnum | Prisma.IdeaLikeScalarFieldEnum[]
 }
 
 /**

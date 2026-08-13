@@ -26,3 +26,8 @@ export type User = Prisma.UserModel
  *
  */
 export type Idea = Prisma.IdeaModel
+/**
+ * Model IdeaLike
+ *
+ */
+export type IdeaLike = Prisma.IdeaLikeModel
