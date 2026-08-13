@@ -14,7 +14,7 @@ $breakpoint: '<=900px';
   .navigation {
     height: 100%;
     overflow: auto;
-    flex: 0 0 200px;
+    flex: 0 0 260px;
     padding: 20px 30px;
     border-right: 1px solid $black;
     @include media($breakpoint) {
@@ -26,9 +26,11 @@ $breakpoint: '<=900px';
     }
 
     .logo {
-      font-weight: bold;
-      font-size: 20px;
-      margin-bottom: 10px;
+      padding-top: 2px;
+      width: 100%;
+      max-width: 180px;
+      height: auto;
+      margin-bottom: 15px;
     }
 
     .menu {
