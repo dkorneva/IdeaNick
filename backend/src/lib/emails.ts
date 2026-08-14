@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs'
 import path from 'path'
-import { getNewIdeaRoute } from '@IdeaNick/webapp/src/lib/routes'
+import { getNewIdeaRoute, getViewIdeaRoute } from '@IdeaNick/webapp/src/lib/routes'
 import fg from 'fast-glob'
 import Handlebars from 'handlebars'
 import _ from 'lodash'
@@ -35,7 +35,7 @@ const sendEmail = async ({
   templateName,
   templateVariables = {},
 }: {
-  to: string
+  to: string | string[]
   subject: string
   templateName: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -80,6 +80,23 @@ export const sendIdeaBlockedEmail = async ({ user, idea }: { user: Pick<User, 'e
     templateName: 'ideaBlocked',
     templateVariables: {
       ideaNick: idea.nick,
+    },
+  })
+}
+
+export const sendMostLikedIdeasEmail = async ({
+  users,
+  ideas,
+}: {
+  users: Array<Pick<User, 'email'>>
+  ideas: Array<Pick<Idea, 'nick' | 'name'>>
+}) => {
+  return await sendEmail({
+    to: users.map((user) => user.email),
+    subject: 'Most Liked Ideas!',
+    templateName: 'mostLikedIdeas',
+    templateVariables: {
+      ideas: ideas.map((idea) => ({ name: idea.name, url: getViewIdeaRoute({ abs: true, ideaNick: idea.nick }) })),
     },
   })
 }

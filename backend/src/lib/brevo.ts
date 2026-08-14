@@ -1,6 +1,15 @@
+import https from 'https'
 import axios, { type AxiosResponse } from 'axios'
 import _ from 'lodash'
 import { env } from './env'
+
+const brevoHttpsAgent = new https.Agent({
+  keepAlive: false,
+})
+
+const isRetryableNetworkError = (error: unknown) => {
+  return axios.isAxiosError(error) && ['ECONNRESET', 'ETIMEDOUT', 'ECONNABORTED'].includes(error.code || '')
+}
 
 const makeRequestToBrevo = async ({
   path,
@@ -22,30 +31,60 @@ const makeRequestToBrevo = async ({
       },
     }
   }
-  const response = await axios({
-    method: 'POST',
-    url: `https://api.brevo.com/v3/${path}`,
-    headers: {
-      accept: 'aplication/json',
-      'api-key': env.BREVO_API_KEY,
-      'content-type': 'application/json',
-    },
-    data,
-  })
+  let response: AxiosResponse | null = null
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      response = await axios({
+        method: 'POST',
+        url: `https://api.brevo.com/v3/${path}`,
+        timeout: 15_000,
+        httpsAgent: brevoHttpsAgent,
+        headers: {
+          accept: 'application/json',
+          'api-key': env.BREVO_API_KEY,
+          'content-type': 'application/json',
+          connection: 'close',
+        },
+        data,
+      })
+      break
+    } catch (error) {
+      if (!isRetryableNetworkError(error) || attempt === 3) {
+        throw error
+      }
+      console.warn('Retrying Brevo request after network error', {
+        attempt,
+        code: axios.isAxiosError(error) ? error.code : undefined,
+        path,
+      })
+    }
+  }
+  if (!response) {
+    throw new Error('Brevo request failed without response')
+  }
   return {
     originalResonse: response,
     loggableResponse: _.pick(response, ['status', 'statusText', 'data']),
   }
 }
 
-export const sendEmailThroughBrevo = async ({ to, subject, html }: { to: string; subject: string; html: string }) => {
+export const sendEmailThroughBrevo = async ({
+  to,
+  subject,
+  html,
+}: {
+  to: string | string[]
+  subject: string
+  html: string
+}) => {
+  const recipients = Array.isArray(to) ? to : [to]
   return await makeRequestToBrevo({
     path: 'smtp/email',
     data: {
       subject,
       htmlContent: html,
       sender: { email: env.FROM_EMAIL_ADDRESS, name: env.FROM_EMAIL_NAME },
-      to: [{ email: to }],
+      to: recipients.map((email) => ({ email })),
     },
   })
 }
