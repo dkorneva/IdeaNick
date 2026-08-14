@@ -1,3 +1,4 @@
+import { type Server } from 'http'
 import cors from 'cors'
 import express from 'express'
 import { AppContext, createAppContext } from './lib/ctx'
@@ -6,6 +7,8 @@ import { applyPassportToExpressApp } from './lib/passport'
 import { applyTrpcToExpressApp } from './lib/trpc'
 import { trpcRouter } from './router'
 import { presetDb } from './scripts/presetDb'
+
+let server: Server | null = null
 
 void (async () => {
   let ctx: AppContext | null = null
@@ -22,11 +25,18 @@ void (async () => {
     applyPassportToExpressApp(expressApp, ctx)
     await applyTrpcToExpressApp(expressApp, ctx, trpcRouter)
 
-    expressApp.listen(env.PORT, () => {
+    server = expressApp.listen(env.PORT, () => {
       console.info(`Listening at http://localhost:${env.PORT}`)
+    })
+
+    server.on('error', async (error) => {
+      console.error(error)
+      await ctx?.stop()
+      process.exitCode = 1
     })
   } catch (error) {
     console.error(error)
+    server?.close()
     await ctx?.stop()
   }
 })()
