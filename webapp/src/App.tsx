@@ -24,16 +24,16 @@ export const App = () => {
         <AppContextProvider>
           <BrowserRouter>
             <Routes>
-              <Route path={routes.getSignOutRoute()} element={<SignOutPage />}></Route>
+              <Route path={routes.getSignOutRoute.definition} element={<SignOutPage />}></Route>
               <Route element={<Layout />}>
-                <Route path={routes.getSignInRoute()} element={<SignInPage />}></Route>
-                <Route path={routes.getSignUpRoute()} element={<SignUpPage />}></Route>
-                <Route path={routes.getAllIdeasRoute()} element={<AllIdeasPage />}></Route>
-                <Route path={routes.getNewIdeaRoute()} element={<NewIdeaPage />}></Route>
-                <Route path={routes.getViewIdeaRoute(routes.viewIdeaRouteParams)} element={<ViewIdeaPage />}></Route>
-                <Route path={routes.getEditIdeaRoute(routes.editIdeaRouteParams)} element={<EditIdeaPage />}></Route>
+                <Route path={routes.getSignInRoute.definition} element={<SignInPage />}></Route>
+                <Route path={routes.getSignUpRoute.definition} element={<SignUpPage />}></Route>
+                <Route path={routes.getAllIdeasRoute.definition} element={<AllIdeasPage />}></Route>
+                <Route path={routes.getNewIdeaRoute.definition} element={<NewIdeaPage />}></Route>
+                <Route path={routes.getViewIdeaRoute.definition} element={<ViewIdeaPage />}></Route>
+                <Route path={routes.getEditIdeaRoute.definition} element={<EditIdeaPage />}></Route>
                 <Route path="*" element={<NotFoundPage />}></Route>
-                <Route path={routes.getEditProfileRoute()} element={<EditProfilePage />}></Route>
+                <Route path={routes.getEditProfileRoute.definition} element={<EditProfilePage />}></Route>
               </Route>
             </Routes>
           </BrowserRouter>
