@@ -4,6 +4,7 @@ import fg from 'fast-glob'
 import Handlebars from 'handlebars'
 import _ from 'lodash'
 import { type Idea, type User } from '../generated/prisma/client'
+import { sendEmailThroughBrevo } from './brevo'
 import { env } from './env'
 
 // memoize: когда в первый раз вызываем функцию getHtmlTemplates, вызовется async функция и вернёт htmlTemplates, но во все последующие вызовы она вернёт закешированный результат выполнения этой функции
@@ -45,12 +46,12 @@ const sendEmail = async ({
       homeUrl: env.WEBAPP_URL,
     }
     const html = await getEmailHtml(templateName, fullTemplateVariables)
+    const { loggableResponse } = await sendEmailThroughBrevo({ to, html, subject })
     console.info('sendEmail', {
       to,
-      subject,
       templateName,
-      fullTemplateVariables,
-      html,
+      templateVariables,
+      response: loggableResponse,
     })
     return { ok: true }
   } catch (error) {
