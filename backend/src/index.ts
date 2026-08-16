@@ -1,8 +1,9 @@
 // eslint-disable-next-line import/order
-import { logger } from '../src/lib/logger'
+import debug from 'debug'
 import { type Server } from 'http'
 import cors from 'cors'
 import express from 'express'
+import { logger } from '../src/lib/logger'
 import { applyCron } from './lib/cron'
 import { AppContext, createAppContext } from './lib/ctx'
 import { env } from './lib/env'
@@ -16,6 +17,7 @@ void (async () => {
   let ctx: AppContext | null = null
 
   try {
+    debug.enable(env.DEBUG)
     ctx = createAppContext()
     await presetDb(ctx)
     const expressApp = express()
