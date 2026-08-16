@@ -1,0 +1,9 @@
+{
+  "extends": "../backend/tsconfig.json",
+  "compilerOptions": {
+    "moduleResolution": "node16",
+    "module": "Node16",
+    "types": ["node"]
+  },
+  "include": ["src"]
+}

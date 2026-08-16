@@ -1,6 +1,7 @@
 packages:
   - backend
   - webapp
+  - shared
 
 allowBuilds:
   '@parcel/watcher': true
