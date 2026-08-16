@@ -7,6 +7,7 @@ import _ from 'lodash'
 import { type Idea, type User } from '../generated/prisma/client'
 import { sendEmailThroughBrevo } from './brevo'
 import { env } from './env'
+import { logger } from './logger'
 
 // memoize: когда в первый раз вызываем функцию getHtmlTemplates, вызовется async функция и вернёт htmlTemplates, но во все последующие вызовы она вернёт закешированный результат выполнения этой функции
 const getHbrTemplates = _.memoize(async () => {
@@ -48,7 +49,7 @@ const sendEmail = async ({
     }
     const html = await getEmailHtml(templateName, fullTemplateVariables)
     const { loggableResponse } = await sendEmailThroughBrevo({ to, html, subject })
-    console.info('sendEmail', {
+    logger.info('email', 'sendEmail', {
       to,
       templateName,
       templateVariables,
@@ -56,7 +57,11 @@ const sendEmail = async ({
     })
     return { ok: true }
   } catch (error) {
-    console.error(error)
+    logger.error('email', error, {
+      to,
+      templateName,
+      templateVariables,
+    })
     return { ok: false }
   }
 }

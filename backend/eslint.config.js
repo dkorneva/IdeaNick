@@ -24,6 +24,7 @@ export default [
     },
     rules: {
       'node/no-process-env': 'error',
+      'no-console': ['error'],
     },
   },
   {

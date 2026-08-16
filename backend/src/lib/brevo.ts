@@ -52,11 +52,6 @@ const makeRequestToBrevo = async ({
       if (!isRetryableNetworkError(error) || attempt === 3) {
         throw error
       }
-      console.warn('Retrying Brevo request after network error', {
-        attempt,
-        code: axios.isAxiosError(error) ? error.code : undefined,
-        path,
-      })
     }
   }
   if (!response) {

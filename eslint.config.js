@@ -1,10 +1,10 @@
 import pluginJs from '@eslint/js'
 import eslintConfigPrettier from 'eslint-config-prettier'
 import pluginImport from 'eslint-plugin-import'
+import node from 'eslint-plugin-node'
 import prettierPlugin from 'eslint-plugin-prettier'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
-import node from 'eslint-plugin-node'
 // import pluginJsxA11y from 'eslint-plugin-jsx-a11y';
 
 export default [
@@ -60,7 +60,6 @@ export default [
       'jsx-a11y/anchor-is-valid': 'off',
       curly: ['error', 'all'],
       'no-irregular-whitespace': ['error', { skipTemplates: true, skipStrings: true }],
-      'no-console': ['error', { allow: ['info', 'error', 'warn'] }],
     },
   },
 ]

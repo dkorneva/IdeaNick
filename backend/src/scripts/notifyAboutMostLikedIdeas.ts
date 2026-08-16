@@ -35,5 +35,4 @@ export const notifyAboutMostLikedIdeas = async (ctx: AppContext) => {
     },
   })
   await sendMostLikedIdeasEmail({ users, ideas: mostLikedIdeas })
-  console.info(mostLikedIdeas)
 }
