@@ -7,6 +7,7 @@ import { serializeError } from 'serialize-error'
 import { MESSAGE } from 'triple-beam'
 import winston from 'winston'
 import * as yaml from 'yaml'
+import { deepMap } from '../utils/deepMap'
 import { env } from './env'
 
 const baseFormat = winston.format.combine(
@@ -54,14 +55,24 @@ export const winstonLogger = winston.createLogger({
   ],
 })
 
+type Meta = Record<string, any> | undefined
+const prettifyMeta = (meta: Meta): Meta => {
+  return deepMap(meta, ({ key, value }) => {
+    if (['email', 'password', 'newPassword', 'oldPassword', 'token', 'text', 'description'].includes(key)) {
+      return '*'
+    }
+    return value
+  })
+}
+
 export const logger = {
-  info: (logType: string, message: string, meta?: Record<string, any>) => {
+  info: (logType: string, message: string, meta?: Meta) => {
     if (!debug.enabled(`IdeaNick:${logType}`)) {
       return
     }
-    winstonLogger.info(message, { logType, ...meta })
+    winstonLogger.info(message, { logType, ...prettifyMeta(meta) })
   },
-  error: (logType: string, error: any, meta?: Record<string, any>) => {
+  error: (logType: string, error: any, meta?: Meta) => {
     if (!debug.enabled(`IdeaNick: ${logType}`)) {
       return
     }
@@ -70,7 +81,7 @@ export const logger = {
       logType,
       error,
       errorStack: serializedError.stack,
-      ...meta,
+      ...prettifyMeta(meta),
     })
   },
 }
