@@ -1,14 +1,8 @@
 import 'dotenv/config'
-import { PrismaPg } from '@prisma/adapter-pg'
-import { PrismaClient } from '../generated/prisma/client'
+import { createPrismaClient } from '../lib/prisma'
 
 export const createAppContext = () => {
-  const adapter = new PrismaPg({
-    // eslint-disable-next-line node/no-process-env
-    connectionString: process.env.DATABASE_URL,
-  })
-
-  const prisma = new PrismaClient({ adapter })
+  const prisma = createPrismaClient()
 
   return {
     prisma,
