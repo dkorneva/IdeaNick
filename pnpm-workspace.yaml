@@ -6,6 +6,7 @@ packages:
 allowBuilds:
   '@parcel/watcher': true
   '@prisma/engines': false
+  '@sentry/cli': false
   esbuild: false
   prisma: false
 
