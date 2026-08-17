@@ -9,6 +9,7 @@ allowBuilds:
   '@sentry/cli': false
   esbuild: false
   prisma: false
+  unrs-resolver: false
 
 overrides:
   resolve: 1.22.12

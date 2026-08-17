@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "test": "jest",
     "types": "tsc --noEmit --project ./tsconfig.json",
     "lint": "eslint --cache -cache-location ./node_modules/.cache/.eslintcache --ext .ts",
     "prettify": "prettier --log-level warn --cache --write \"{src/**/*,*}.{ts,tsx,js,json,yml,scss}\" --ignore-pattern \"**/{node_modules,dist}/**/*\""

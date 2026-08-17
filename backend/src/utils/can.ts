@@ -4,7 +4,7 @@ import { UserPermission } from '../generated/prisma/browser'
 type MaybeUser = Pick<User, 'permissions' | 'id'> | null
 type MaybeIdea = Pick<Idea, 'authorId'> | null
 
-const hasPermission = (user: MaybeUser, permission: UserPermission) => {
+export const hasPermission = (user: MaybeUser, permission: UserPermission) => {
   return user?.permissions.includes(permission) || user?.permissions.includes('ALL') || false
 }
 

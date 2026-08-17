@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "pnpm build-emails && ts-node-dev --watch ./src/emails/dist,./.env --rs --exit-child ./src/index.ts",
+    "test": "jest",
     "build-emails": "rimraf ./src/emails/dist && node -e \"require('fs').mkdirSync('./src/emails/dist',{recursive:true})\" && mjml --config.allowIncludes true \"./src/emails/[!_]*.mjml\" -o ./src/emails/dist",
     "watch-emails": "node -e \"require('fs').mkdirSync('./src/emails/dist',{recursive:true})\" && mjml --config.allowIncludes true -w \"./src/emails/[!_]*.mjml\" -o ./src/emails/dist",
     "copy-emails": "copyfiles ./src/emails/dist/*.html ./dist/backend",

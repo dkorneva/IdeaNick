@@ -1,6 +1,7 @@
 import pluginJs from '@eslint/js'
 import eslintConfigPrettier from 'eslint-config-prettier'
 import pluginImport from 'eslint-plugin-import'
+import jest from 'eslint-plugin-jest'
 import node from 'eslint-plugin-node'
 import prettierPlugin from 'eslint-plugin-prettier'
 import globals from 'globals'
@@ -12,13 +13,14 @@ export default [
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     plugins: {
       node,
+      jest,
     },
     rules: {
       'node/no-process-env': 'error',
     },
   },
   {
-    ignores: ['node_modules', 'dist'],
+    ignores: ['node_modules', 'dist', '*.config.js'],
   },
   {
     plugins: {
@@ -34,6 +36,13 @@ export default [
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
+  {
+    files: ['**/*.{test,spec}.{js,jsx,ts,tsx}', '**/*.unit.{js,jsx,ts,tsx}'],
+    ...jest.configs['flat/recommended'],
+    languageOptions: {
+      globals: globals.jest,
+    },
+  },
   {
     rules: {
       ...prettierPlugin.configs.recommended.rules,
