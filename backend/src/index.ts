@@ -41,7 +41,7 @@ void (async () => {
     server = expressApp.listen(env.PORT, () => {
       logger.info('express', `Listening at http://localhost:${env.PORT}`)
     })
-    throw new Error('Unexpected error 2')
+    throw new Error('Error with sourcemap 2')
   } catch (error) {
     logger.error('app', error)
     server?.close()
