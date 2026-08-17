@@ -1,5 +1,6 @@
 // это мутация
 // мутация что-то меняет на сервере, query просто забирает что-то с сервера, тем не менее, мутация тоже может возвращать что-то с сервера
+import { ExpectedError } from '../../../lib/error'
 import { trpcLoggedProcedure } from '../../../lib/trpc'
 import { zCreateIdeaTrpcInput } from './input'
 
@@ -16,7 +17,7 @@ export const createIdeaTrpcRoute = trpcLoggedProcedure
       },
     })
     if (exIdea) {
-      throw new Error('Idea with this nick already exists')
+      throw new ExpectedError('Idea with this nick already exists')
     }
     await ctx.prisma.idea.create({
       data: { ...input, authorId: ctx.me.id },

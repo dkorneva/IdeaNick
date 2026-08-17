@@ -13,6 +13,7 @@ if (env.VITE_WEBAPP_SENTRY_DSN) {
 
 export const sentryCaptureException = (error: Error) => {
   if (env.VITE_WEBAPP_SENTRY_DSN) {
+    console.log('Sent to Sentry')
     Sentry.captureException(error)
   }
 }

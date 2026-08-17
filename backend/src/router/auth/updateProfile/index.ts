@@ -1,3 +1,4 @@
+import { ExpectedError } from '../../../lib/error'
 import { toClientMe } from '../../../lib/models'
 import { trpcLoggedProcedure } from '../../../lib/trpc'
 import { zUpdateProfileTrpcInput } from './input'
@@ -5,9 +6,6 @@ import { zUpdateProfileTrpcInput } from './input'
 export const updateProfileTrpcRoute = trpcLoggedProcedure
   .input(zUpdateProfileTrpcInput)
   .mutation(async ({ ctx, input }) => {
-    if (Math.random()) {
-      throw new Error('RANDOM ERROR')
-    }
     if (!ctx.me) {
       throw new Error('UNAUTHORIZED')
     }
@@ -18,7 +16,7 @@ export const updateProfileTrpcRoute = trpcLoggedProcedure
         },
       })
       if (exUser) {
-        throw new Error('User with this nick already exists')
+        throw new ExpectedError('User with this nick already exists')
       }
     }
     const updatedMe = await ctx.prisma.user.update({
@@ -28,8 +26,5 @@ export const updateProfileTrpcRoute = trpcLoggedProcedure
       data: input,
     })
     ctx.me = updatedMe
-    if (Math.random()) {
-      throw new Error('RANDOM ERROR')
-    }
     return toClientMe(updatedMe)
   })
