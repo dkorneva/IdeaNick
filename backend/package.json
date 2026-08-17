@@ -8,7 +8,7 @@
     "build-emails": "rimraf ./src/emails/dist && node -e \"require('fs').mkdirSync('./src/emails/dist',{recursive:true})\" && mjml --config.allowIncludes true \"./src/emails/[!_]*.mjml\" -o ./src/emails/dist",
     "watch-emails": "node -e \"require('fs').mkdirSync('./src/emails/dist',{recursive:true})\" && mjml --config.allowIncludes true -w \"./src/emails/[!_]*.mjml\" -o ./src/emails/dist",
     "copy-emails": "copyfiles ./src/emails/dist/*.html ./dist/backend",
-    "build-ts": "rimraf ./dist && tsc --build ./tsconfig.json",
+    "build-ts": "rimraf ./dist && tsc --build ./tsconfig.build.json",
     "build": "pnpm build-ts && pnpm build-emails && pnpm copy-emails",
     "sentry-release": "dotenv -- node -e \"const {spawnSync}=require('child_process'); const version=process.env.SOURCE_VERSION; const token=process.env.SENTRY_AUTH_TOKEN; if(!version){console.error('SOURCE_VERSION is required'); process.exit(1)} if(!token){console.error('SENTRY_AUTH_TOKEN is required'); process.exit(1)} const result=spawnSync('sentry-cli',['releases','new',version,'--finalize','--org','ideanick-pf','--project','backend','--auth-token',token],{stdio:'inherit',shell:true}); process.exit(result.status ?? 1)\"",
     "sentry-sourcemaps": "dotenv -- node -e \"const {spawnSync}=require('child_process'); const version=process.env.SOURCE_VERSION; const token=process.env.SENTRY_AUTH_TOKEN; if(!version){console.error('SOURCE_VERSION is required'); process.exit(1)} if(!token){console.error('SENTRY_AUTH_TOKEN is required'); process.exit(1)} const result=spawnSync('sentry-cli',['sourcemaps','upload','./dist','--release',version,'--org','ideanick-pf','--project','backend','--auth-token',token],{stdio:'inherit',shell:true}); process.exit(result.status ?? 1)\"",

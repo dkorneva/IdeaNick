@@ -22,9 +22,28 @@ export default [
         tsconfigRootDir,
       },
     },
+    settings: {
+      'import/resolver': {
+        node: {
+          extensions: ['.js', '.ts', '.tsx'],
+        },
+      },
+    },
     rules: {
       'node/no-process-env': 'error',
       'no-console': ['error'],
+      'import/no-restricted-paths': [
+        'error',
+        {
+          zones: [
+            {
+              target: './src/**/!(*.integration.test.ts)',
+              from: './src/test',
+              message: 'Import something from test dir only inside integration tests',
+            },
+          ],
+        },
+      ],
     },
   },
   {
