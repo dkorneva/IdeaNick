@@ -5,6 +5,9 @@ import { zUpdateProfileTrpcInput } from './input'
 export const updateProfileTrpcRoute = trpcLoggedProcedure
   .input(zUpdateProfileTrpcInput)
   .mutation(async ({ ctx, input }) => {
+    if (Math.random()) {
+      throw new Error('RANDOM ERROR')
+    }
     if (!ctx.me) {
       throw new Error('UNAUTHORIZED')
     }
@@ -25,5 +28,8 @@ export const updateProfileTrpcRoute = trpcLoggedProcedure
       data: input,
     })
     ctx.me = updatedMe
+    if (Math.random()) {
+      throw new Error('RANDOM ERROR')
+    }
     return toClientMe(updatedMe)
   })
