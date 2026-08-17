@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EOL } from 'os'
+import { TRPCError } from '@trpc/server'
 import { debug } from 'debug'
 import _ from 'lodash'
 import pc from 'picocolors'
@@ -9,6 +10,8 @@ import winston from 'winston'
 import * as yaml from 'yaml'
 import { deepMap } from '../utils/deepMap'
 import { env } from './env'
+import { ExpectedError } from './error'
+import { sentryCaptureException } from './sentry'
 
 const baseFormat = winston.format.combine(
   winston.format.timestamp({
@@ -55,8 +58,8 @@ export const winstonLogger = winston.createLogger({
   ],
 })
 
-type Meta = Record<string, any> | undefined
-const prettifyMeta = (meta: Meta): Meta => {
+export type LoggerMetaData = Record<string, any> | undefined
+const prettifyMeta = (meta: LoggerMetaData): LoggerMetaData => {
   return deepMap(meta, ({ key, value }) => {
     if (['email', 'password', 'newPassword', 'oldPassword', 'token', 'text', 'description'].includes(key)) {
       return '*'
@@ -66,13 +69,19 @@ const prettifyMeta = (meta: Meta): Meta => {
 }
 
 export const logger = {
-  info: (logType: string, message: string, meta?: Meta) => {
+  info: (logType: string, message: string, meta?: LoggerMetaData) => {
     if (!debug.enabled(`IdeaNick:${logType}`)) {
       return
     }
     winstonLogger.info(message, { logType, ...prettifyMeta(meta) })
   },
-  error: (logType: string, error: any, meta?: Meta) => {
+  error: (logType: string, error: any, meta?: LoggerMetaData) => {
+    const isNativeExpectedError = error instanceof ExpectedError
+    const isTrpcExpectedError = error instanceof TRPCError && error.cause instanceof ExpectedError
+    const prettifiedMetaData = prettifyMeta(meta)
+    if (!isNativeExpectedError && !isTrpcExpectedError) {
+      sentryCaptureException(error, prettifiedMetaData)
+    }
     if (!debug.enabled(`IdeaNick: ${logType}`)) {
       return
     }
