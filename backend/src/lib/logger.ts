@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EOL } from 'os'
+import { omit } from '@IdeaNick/shared/src/omit'
 import { TRPCError } from '@trpc/server'
 import { debug } from 'debug'
 import _ from 'lodash'
@@ -31,7 +32,7 @@ const prettyFormat = winston.format((logData) => {
   const levelAndType = `${logData.level} ${logData.logType}`
   const topMessage = `${setColor(levelAndType)} ${pc.green(logData.timestamp as string)}${EOL}${logData.message}`
   // "всё, кроме..."
-  const visibleMessageTags = _.omit(logData, ['level', 'logType', 'timestamp', 'message', 'service', 'hostEnv'])
+  const visibleMessageTags = omit(logData, ['level', 'logType', 'timestamp', 'message', 'service', 'hostEnv'])
 
   const stringifyedLogData = _.trim(
     yaml.stringify(visibleMessageTags, (_key, value) => (_.isFunction(value) ? 'Function' : value))

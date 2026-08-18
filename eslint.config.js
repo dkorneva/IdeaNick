@@ -71,4 +71,10 @@ export default [
       'no-irregular-whitespace': ['error', { skipTemplates: true, skipStrings: true }],
     },
   },
+  {
+    files: ['shared/**/*.ts'],
+    rules: {
+      '@typescript-eslint/no-wrapper-object-types': 'off',
+    },
+  },
 ]

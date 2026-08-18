@@ -1,6 +1,6 @@
 import { zUpdateIdeaTrpcInput } from '@IdeaNick/backend/src/router/ideas/updateIdea/input'
 import { canEditIdea } from '@IdeaNick/backend/src/utils/can'
-import pick from 'lodash/pick'
+import { pick } from '@IdeaNick/shared/src/pick'
 import { useNavigate } from 'react-router-dom'
 import { Alert } from '../../../components/Alert'
 import { Button } from '../../../components/Button'

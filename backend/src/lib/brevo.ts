@@ -1,6 +1,6 @@
 import https from 'https'
+import { pick } from '@IdeaNick/shared/src/pick'
 import axios, { type AxiosResponse } from 'axios'
-import _ from 'lodash'
 import { env } from './env'
 
 const brevoHttpsAgent = new https.Agent({
@@ -59,7 +59,7 @@ const makeRequestToBrevo = async ({
   }
   return {
     originalResonse: response,
-    loggableResponse: _.pick(response, ['status', 'statusText', 'data']),
+    loggableResponse: pick(response, ['status', 'statusText', 'data']),
   }
 }
 

@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { omit } from '@IdeaNick/shared/src/omit'
 import { trpcLoggedProcedure } from '../../../lib/trpc'
 import { zGetIdeasTrpcInput } from './input'
 // в tRPC не нужно думать об адресе endpoint, об enpoints на бэкенде нужно рассуждать как о неких функциях, которые будем "дёргать" с фронта
@@ -65,7 +65,7 @@ export const getIdeasTrpcRoute = trpcLoggedProcedure.input(zGetIdeasTrpcInput).q
   const nextCursor = nextIdea?.serialNumber
   const rawIdeasExceptNext = rawIdeas.slice(0, input.limit)
   const ideasExceptNext = rawIdeasExceptNext.map((idea) => ({
-    ..._.omit(idea, ['_count']),
+    ...omit(idea, ['_count']),
     likesCount: idea._count.ideasLikes,
   }))
 

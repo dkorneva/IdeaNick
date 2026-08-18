@@ -6,6 +6,7 @@
   "scripts": {
     "b": "pnpm --filter @IdeaNick/backend",
     "w": "pnpm --filter @IdeaNick/webapp",
+    "sh": "pnpm --filter @IdeaNick/shared",
     "dev": "pnpm -r --parallel dev",
     "test": "pnpm -r test",
     "types": "pnpm b types && pnpm w types",
