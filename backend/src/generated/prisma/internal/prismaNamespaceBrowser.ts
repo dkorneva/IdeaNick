@@ -73,6 +73,7 @@ export const UserScalarFieldEnum = {
   nick: 'nick',
   email: 'email',
   name: 'name',
+  avatar: 'avatar',
   password: 'password',
   createdAt: 'createdAt',
   permissions: 'permissions',
@@ -117,23 +118,24 @@ export const QueryMode = {
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
-export const UserOrderByRelevanceFieldEnum = {
-  id: 'id',
-  nick: 'nick',
-  email: 'email',
-  name: 'name',
-  password: 'password',
-} as const
-
-export type UserOrderByRelevanceFieldEnum =
-  (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
-
 export const NullsOrder = {
   first: 'first',
   last: 'last',
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+export const UserOrderByRelevanceFieldEnum = {
+  id: 'id',
+  nick: 'nick',
+  email: 'email',
+  name: 'name',
+  avatar: 'avatar',
+  password: 'password',
+} as const
+
+export type UserOrderByRelevanceFieldEnum =
+  (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
 
 export const IdeaOrderByRelevanceFieldEnum = {
   id: 'id',

@@ -19,6 +19,7 @@ export const getIdeaTrpcRoute = trpcLoggedProcedure.input(zGetIdeaTrpcInput).que
           id: true,
           nick: true,
           name: true,
+          avatar: true,
         },
       },
       // запрашиваем связаннные ideasLikes, запрашиваем id, ищем только те, где userId === ctx.me.id (наш id текущего пользователя)

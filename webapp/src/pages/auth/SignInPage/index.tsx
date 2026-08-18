@@ -14,7 +14,7 @@ export const SignInPage = withPageWrapper({
   title: 'Sign In',
 })(() => {
   const trpcUtils = trpc.useUtils()
-  const signIn = trpc.SignIn.useMutation()
+  const signIn = trpc.signIn.useMutation()
   const { formik, buttonProps, alertProps } = useForm({
     initialValues: {
       nick: '',
