@@ -1,13 +1,11 @@
 import { promises as fs } from 'fs'
 import path from 'path'
-import { getNewIdeaRoute, getViewIdeaRoute } from '@IdeaNick/webapp/src/lib/routes'
 import fg from 'fast-glob'
 import Handlebars from 'handlebars'
 import _ from 'lodash'
-import { type Idea, type User } from '../generated/prisma/client'
-import { sendEmailThroughBrevo } from './brevo'
-import { env } from './env'
-import { logger } from './logger'
+import { sendEmailThroughBrevo } from '../brevo'
+import { env } from '../env'
+import { logger } from '../logger'
 
 // memoize: когда в первый раз вызываем функцию getHtmlTemplates, вызовется async функция и вернёт htmlTemplates, но во все последующие вызовы она вернёт закешированный результат выполнения этой функции
 const getHbrTemplates = _.memoize(async () => {
@@ -30,7 +28,7 @@ const getEmailHtml = async (templateName: string, templateVariables: Record<stri
   return html
 }
 
-const sendEmail = async ({
+export const sendEmail = async ({
   to,
   subject,
   templateName,
@@ -64,44 +62,4 @@ const sendEmail = async ({
     })
     return { ok: false }
   }
-}
-
-export const sendWelcomeEmail = async ({ user }: { user: Pick<User, 'nick' | 'email'> }) => {
-  return await sendEmail({
-    to: user.email,
-    subject: 'Thanks For Registration!',
-    templateName: 'welcome',
-    templateVariables: {
-      userNick: user.nick,
-      addIdeaUrl: `${getNewIdeaRoute({ abs: true })}`,
-    },
-  })
-}
-
-export const sendIdeaBlockedEmail = async ({ user, idea }: { user: Pick<User, 'email'>; idea: Pick<Idea, 'nick'> }) => {
-  return await sendEmail({
-    to: user.email,
-    subject: 'Your Idea Blocked!',
-    templateName: 'ideaBlocked',
-    templateVariables: {
-      ideaNick: idea.nick,
-    },
-  })
-}
-
-export const sendMostLikedIdeasEmail = async ({
-  users,
-  ideas,
-}: {
-  users: Array<Pick<User, 'email'>>
-  ideas: Array<Pick<Idea, 'nick' | 'name'>>
-}) => {
-  return await sendEmail({
-    to: users.map((user) => user.email),
-    subject: 'Most Liked Ideas!',
-    templateName: 'mostLikedIdeas',
-    templateVariables: {
-      ideas: ideas.map((idea) => ({ name: idea.name, url: getViewIdeaRoute({ abs: true, ideaNick: idea.nick }) })),
-    },
-  })
 }

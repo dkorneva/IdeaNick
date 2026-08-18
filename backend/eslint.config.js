@@ -32,6 +32,24 @@ export default [
     rules: {
       'node/no-process-env': 'error',
       'no-console': ['error'],
+      'import/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'parent', 'sibling', 'index'],
+          pathGroups: [
+            {
+              pattern: '{.,..}/**/test/integration',
+              group: 'builtin',
+              position: 'before',
+            },
+          ],
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: false,
+            orderImportKind: 'asc',
+          },
+        },
+      ],
       'import/no-restricted-paths': [
         'error',
         {

@@ -1,4 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import '../lib/sentry.mock'
+import '../lib/emails/utils.mock'
+import '../lib/brevo.mock'
+
 import _ from 'lodash'
 import { type Idea, type User } from '../generated/prisma/client'
 import { createAppContext } from '../lib/ctx'
@@ -32,7 +36,7 @@ export const withoutNoize = (input: any): any => {
   return deepMap(input, ({ value }) => {
     if (_.isObject(value) && !_.isArray(value)) {
       return _.entries(value).reduce((acc, [objectKey, objectValue]: [string, any]) => {
-        if ([/^id$/, /Id$/, /At$/].some((regex) => regex.test(objectKey))) {
+        if ([/^id$/, /Id$/, /At$/, /^url$/].some((regex) => regex.test(objectKey))) {
           return acc
         }
         return {
