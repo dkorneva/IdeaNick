@@ -22,7 +22,7 @@ const makeRequestToBrevo = async ({
   originalResonse?: AxiosResponse
   loggableResponse: Pick<AxiosResponse, 'status' | 'statusText' | 'data'>
 }> => {
-  if (!env.BREVO_API_KEY) {
+  if (!env.BREVO_API_KEY || env.NODE_ENV === 'test') {
     return {
       loggableResponse: {
         status: 200,

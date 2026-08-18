@@ -17,7 +17,7 @@ void (async () => {
   let ctx: AppContext | null = null
 
   try {
-    debug.enable(env.DEBUG)
+    debug.enable(env.DEBUG || '')
     ctx = createAppContext()
     await presetDb(ctx)
     const expressApp = express()

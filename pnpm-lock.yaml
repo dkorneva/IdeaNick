@@ -23,6 +23,9 @@ importers:
       copyfiles:
         specifier: ^2.4.1
         version: 2.4.1
+      cross-env:
+        specifier: ^10.1.0
+        version: 10.1.0
       eslint:
         specifier: ^9.20.0
         version: 9.39.5(jiti@2.7.0)(supports-color@10.2.2)
@@ -649,6 +652,9 @@ packages:
 
   '@emnapi/wasi-threads@1.2.2':
     resolution: {integrity: sha512-c95qOXkHdydNKhscBTebqEC1CVAZpyqOfVfBzQ1qgzyl3gfeldUjIggDbIZgDKsHLgnsM+igH7TJ/eAasaVuMA==, tarball: https://registry.npmjs.org/@emnapi/wasi-threads/-/wasi-threads-1.2.2.tgz}
+
+  '@epic-web/invariant@1.0.0':
+    resolution: {integrity: sha512-lrTPqgvfFQtR/eY/qkIzp98OGdNJu0m5ji3q/nJI8v3SXkRKEnWiOxMmbvcSoAIzv/cGiuvRy57k4suKQSAdwA==, tarball: https://registry.npmjs.org/@epic-web/invariant/-/invariant-1.0.0.tgz}
 
   '@esbuild/android-arm64@0.18.20':
     resolution: {integrity: sha512-Nz4rJcchGDtENV0eMKUNa6L12zz2zBDXuhj/Vjh18zGqB44Bi7MBMSXjgunJgjRhCmKOjnPuZp4Mb6OKqtMHLQ==, tarball: https://registry.npmjs.org/@esbuild/android-arm64/-/android-arm64-0.18.20.tgz}
@@ -2660,6 +2666,11 @@ packages:
   cron@4.4.0:
     resolution: {integrity: sha512-fkdfq+b+AHI4cKdhZlppHveI/mgz2qpiYxcm+t5E5TsxX7QrLS1VE0+7GENEk9z0EeGPcpSciGv6ez24duWhwQ==, tarball: https://registry.npmjs.org/cron/-/cron-4.4.0.tgz}
     engines: {node: '>=18.x'}
+
+  cross-env@10.1.0:
+    resolution: {integrity: sha512-GsYosgnACZTADcmEyJctkJIoqAhHjttw7RsFrVoJNXbsWWqaq6Ym+7kZjq6mS45O0jij6vtiReppKQEtqWy6Dw==, tarball: https://registry.npmjs.org/cross-env/-/cross-env-10.1.0.tgz}
+    engines: {node: '>=20'}
+    hasBin: true
 
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==, tarball: https://registry.npmjs.org/cross-spawn/-/cross-spawn-7.0.6.tgz}
@@ -6571,6 +6582,8 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
+  '@epic-web/invariant@1.0.0': {}
+
   '@esbuild/android-arm64@0.18.20':
     optional: true
 
@@ -8716,6 +8729,11 @@ snapshots:
     dependencies:
       '@types/luxon': 3.7.4
       luxon: 3.7.2
+
+  cross-env@10.1.0:
+    dependencies:
+      '@epic-web/invariant': 1.0.0
+      cross-spawn: 7.0.6
 
   cross-spawn@7.0.6:
     dependencies:
