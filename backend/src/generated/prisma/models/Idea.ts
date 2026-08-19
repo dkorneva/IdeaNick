@@ -68,6 +68,7 @@ export type IdeaCountAggregateOutputType = {
   text: number
   images: number
   certificate: number
+  documents: number
   createdAt: number
   authorId: number
   blockedAt: number
@@ -117,6 +118,7 @@ export type IdeaCountAggregateInputType = {
   text?: true
   images?: true
   certificate?: true
+  documents?: true
   createdAt?: true
   authorId?: true
   blockedAt?: true
@@ -219,6 +221,7 @@ export type IdeaGroupByOutputType = {
   text: string
   images: string[]
   certificate: string | null
+  documents: string[]
   createdAt: Date
   authorId: string
   blockedAt: Date | null
@@ -253,6 +256,7 @@ export type IdeaWhereInput = {
   text?: Prisma.StringFilter<'Idea'> | string
   images?: Prisma.StringNullableListFilter<'Idea'>
   certificate?: Prisma.StringNullableFilter<'Idea'> | string | null
+  documents?: Prisma.StringNullableListFilter<'Idea'>
   createdAt?: Prisma.DateTimeFilter<'Idea'> | Date | string
   authorId?: Prisma.StringFilter<'Idea'> | string
   blockedAt?: Prisma.DateTimeNullableFilter<'Idea'> | Date | string | null
@@ -269,6 +273,7 @@ export type IdeaOrderByWithRelationInput = {
   text?: Prisma.SortOrder
   images?: Prisma.SortOrder
   certificate?: Prisma.SortOrderInput | Prisma.SortOrder
+  documents?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   blockedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -290,6 +295,7 @@ export type IdeaWhereUniqueInput = Prisma.AtLeast<
     text?: Prisma.StringFilter<'Idea'> | string
     images?: Prisma.StringNullableListFilter<'Idea'>
     certificate?: Prisma.StringNullableFilter<'Idea'> | string | null
+    documents?: Prisma.StringNullableListFilter<'Idea'>
     createdAt?: Prisma.DateTimeFilter<'Idea'> | Date | string
     authorId?: Prisma.StringFilter<'Idea'> | string
     blockedAt?: Prisma.DateTimeNullableFilter<'Idea'> | Date | string | null
@@ -308,6 +314,7 @@ export type IdeaOrderByWithAggregationInput = {
   text?: Prisma.SortOrder
   images?: Prisma.SortOrder
   certificate?: Prisma.SortOrderInput | Prisma.SortOrder
+  documents?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   blockedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -330,6 +337,7 @@ export type IdeaScalarWhereWithAggregatesInput = {
   text?: Prisma.StringWithAggregatesFilter<'Idea'> | string
   images?: Prisma.StringNullableListFilter<'Idea'>
   certificate?: Prisma.StringNullableWithAggregatesFilter<'Idea'> | string | null
+  documents?: Prisma.StringNullableListFilter<'Idea'>
   createdAt?: Prisma.DateTimeWithAggregatesFilter<'Idea'> | Date | string
   authorId?: Prisma.StringWithAggregatesFilter<'Idea'> | string
   blockedAt?: Prisma.DateTimeNullableWithAggregatesFilter<'Idea'> | Date | string | null
@@ -344,6 +352,7 @@ export type IdeaCreateInput = {
   text: string
   images?: Prisma.IdeaCreateimagesInput | string[]
   certificate?: string | null
+  documents?: Prisma.IdeaCreatedocumentsInput | string[]
   createdAt?: Date | string
   blockedAt?: Date | string | null
   author: Prisma.UserCreateNestedOneWithoutIdeasInput
@@ -359,6 +368,7 @@ export type IdeaUncheckedCreateInput = {
   text: string
   images?: Prisma.IdeaCreateimagesInput | string[]
   certificate?: string | null
+  documents?: Prisma.IdeaCreatedocumentsInput | string[]
   createdAt?: Date | string
   authorId: string
   blockedAt?: Date | string | null
@@ -373,6 +383,7 @@ export type IdeaUpdateInput = {
   text?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.IdeaUpdateimagesInput | string[]
   certificate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documents?: Prisma.IdeaUpdatedocumentsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   author?: Prisma.UserUpdateOneRequiredWithoutIdeasNestedInput
@@ -388,6 +399,7 @@ export type IdeaUncheckedUpdateInput = {
   text?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.IdeaUpdateimagesInput | string[]
   certificate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documents?: Prisma.IdeaUpdatedocumentsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -403,6 +415,7 @@ export type IdeaCreateManyInput = {
   text: string
   images?: Prisma.IdeaCreateimagesInput | string[]
   certificate?: string | null
+  documents?: Prisma.IdeaCreatedocumentsInput | string[]
   createdAt?: Date | string
   authorId: string
   blockedAt?: Date | string | null
@@ -416,6 +429,7 @@ export type IdeaUpdateManyMutationInput = {
   text?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.IdeaUpdateimagesInput | string[]
   certificate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documents?: Prisma.IdeaUpdatedocumentsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -429,6 +443,7 @@ export type IdeaUncheckedUpdateManyInput = {
   text?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.IdeaUpdateimagesInput | string[]
   certificate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documents?: Prisma.IdeaUpdatedocumentsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -467,6 +482,7 @@ export type IdeaCountOrderByAggregateInput = {
   text?: Prisma.SortOrder
   images?: Prisma.SortOrder
   certificate?: Prisma.SortOrder
+  documents?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   blockedAt?: Prisma.SortOrder
@@ -569,7 +585,16 @@ export type IdeaCreateimagesInput = {
   set: string[]
 }
 
+export type IdeaCreatedocumentsInput = {
+  set: string[]
+}
+
 export type IdeaUpdateimagesInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type IdeaUpdatedocumentsInput = {
   set?: string[]
   push?: string | string[]
 }
@@ -612,6 +637,7 @@ export type IdeaCreateWithoutAuthorInput = {
   text: string
   images?: Prisma.IdeaCreateimagesInput | string[]
   certificate?: string | null
+  documents?: Prisma.IdeaCreatedocumentsInput | string[]
   createdAt?: Date | string
   blockedAt?: Date | string | null
   ideasLikes?: Prisma.IdeaLikeCreateNestedManyWithoutIdeaInput
@@ -626,6 +652,7 @@ export type IdeaUncheckedCreateWithoutAuthorInput = {
   text: string
   images?: Prisma.IdeaCreateimagesInput | string[]
   certificate?: string | null
+  documents?: Prisma.IdeaCreatedocumentsInput | string[]
   createdAt?: Date | string
   blockedAt?: Date | string | null
   ideasLikes?: Prisma.IdeaLikeUncheckedCreateNestedManyWithoutIdeaInput
@@ -669,6 +696,7 @@ export type IdeaScalarWhereInput = {
   text?: Prisma.StringFilter<'Idea'> | string
   images?: Prisma.StringNullableListFilter<'Idea'>
   certificate?: Prisma.StringNullableFilter<'Idea'> | string | null
+  documents?: Prisma.StringNullableListFilter<'Idea'>
   createdAt?: Prisma.DateTimeFilter<'Idea'> | Date | string
   authorId?: Prisma.StringFilter<'Idea'> | string
   blockedAt?: Prisma.DateTimeNullableFilter<'Idea'> | Date | string | null
@@ -683,6 +711,7 @@ export type IdeaCreateWithoutIdeasLikesInput = {
   text: string
   images?: Prisma.IdeaCreateimagesInput | string[]
   certificate?: string | null
+  documents?: Prisma.IdeaCreatedocumentsInput | string[]
   createdAt?: Date | string
   blockedAt?: Date | string | null
   author: Prisma.UserCreateNestedOneWithoutIdeasInput
@@ -697,6 +726,7 @@ export type IdeaUncheckedCreateWithoutIdeasLikesInput = {
   text: string
   images?: Prisma.IdeaCreateimagesInput | string[]
   certificate?: string | null
+  documents?: Prisma.IdeaCreatedocumentsInput | string[]
   createdAt?: Date | string
   authorId: string
   blockedAt?: Date | string | null
@@ -726,6 +756,7 @@ export type IdeaUpdateWithoutIdeasLikesInput = {
   text?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.IdeaUpdateimagesInput | string[]
   certificate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documents?: Prisma.IdeaUpdatedocumentsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   author?: Prisma.UserUpdateOneRequiredWithoutIdeasNestedInput
@@ -740,6 +771,7 @@ export type IdeaUncheckedUpdateWithoutIdeasLikesInput = {
   text?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.IdeaUpdateimagesInput | string[]
   certificate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documents?: Prisma.IdeaUpdatedocumentsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -754,6 +786,7 @@ export type IdeaCreateManyAuthorInput = {
   text: string
   images?: Prisma.IdeaCreateimagesInput | string[]
   certificate?: string | null
+  documents?: Prisma.IdeaCreatedocumentsInput | string[]
   createdAt?: Date | string
   blockedAt?: Date | string | null
 }
@@ -766,6 +799,7 @@ export type IdeaUpdateWithoutAuthorInput = {
   text?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.IdeaUpdateimagesInput | string[]
   certificate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documents?: Prisma.IdeaUpdatedocumentsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ideasLikes?: Prisma.IdeaLikeUpdateManyWithoutIdeaNestedInput
@@ -780,6 +814,7 @@ export type IdeaUncheckedUpdateWithoutAuthorInput = {
   text?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.IdeaUpdateimagesInput | string[]
   certificate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documents?: Prisma.IdeaUpdatedocumentsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ideasLikes?: Prisma.IdeaLikeUncheckedUpdateManyWithoutIdeaNestedInput
@@ -794,6 +829,7 @@ export type IdeaUncheckedUpdateManyWithoutAuthorInput = {
   text?: Prisma.StringFieldUpdateOperationsInput | string
   images?: Prisma.IdeaUpdateimagesInput | string[]
   certificate?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documents?: Prisma.IdeaUpdatedocumentsInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   blockedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -844,6 +880,7 @@ export type IdeaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
       text?: boolean
       images?: boolean
       certificate?: boolean
+      documents?: boolean
       createdAt?: boolean
       authorId?: boolean
       blockedAt?: boolean
@@ -866,6 +903,7 @@ export type IdeaSelectCreateManyAndReturn<
     text?: boolean
     images?: boolean
     certificate?: boolean
+    documents?: boolean
     createdAt?: boolean
     authorId?: boolean
     blockedAt?: boolean
@@ -886,6 +924,7 @@ export type IdeaSelectUpdateManyAndReturn<
     text?: boolean
     images?: boolean
     certificate?: boolean
+    documents?: boolean
     createdAt?: boolean
     authorId?: boolean
     blockedAt?: boolean
@@ -903,6 +942,7 @@ export type IdeaSelectScalar = {
   text?: boolean
   images?: boolean
   certificate?: boolean
+  documents?: boolean
   createdAt?: boolean
   authorId?: boolean
   blockedAt?: boolean
@@ -918,6 +958,7 @@ export type IdeaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
     | 'text'
     | 'images'
     | 'certificate'
+    | 'documents'
     | 'createdAt'
     | 'authorId'
     | 'blockedAt',
@@ -957,6 +998,7 @@ export type $IdeaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
         text: string
         images: string[]
         certificate: string | null
+        documents: string[]
         createdAt: Date
         authorId: string
         blockedAt: Date | null
@@ -1489,6 +1531,7 @@ export interface IdeaFieldRefs {
   readonly text: Prisma.FieldRef<'Idea', 'String'>
   readonly images: Prisma.FieldRef<'Idea', 'String[]'>
   readonly certificate: Prisma.FieldRef<'Idea', 'String'>
+  readonly documents: Prisma.FieldRef<'Idea', 'String[]'>
   readonly createdAt: Prisma.FieldRef<'Idea', 'DateTime'>
   readonly authorId: Prisma.FieldRef<'Idea', 'String'>
   readonly blockedAt: Prisma.FieldRef<'Idea', 'DateTime'>

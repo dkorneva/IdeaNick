@@ -687,6 +687,7 @@ export const IdeaScalarFieldEnum = {
   text: 'text',
   images: 'images',
   certificate: 'certificate',
+  documents: 'documents',
   createdAt: 'createdAt',
   authorId: 'authorId',
   blockedAt: 'blockedAt',
@@ -744,6 +745,7 @@ export const IdeaOrderByRelevanceFieldEnum = {
   text: 'text',
   images: 'images',
   certificate: 'certificate',
+  documents: 'documents',
   authorId: 'authorId',
 } as const
 
