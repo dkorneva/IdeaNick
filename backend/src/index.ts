@@ -4,6 +4,7 @@ import cors from 'cors'
 import debug from 'debug'
 import express from 'express'
 import { logger } from '../src/lib/logger'
+import { applyServeWebApp } from '../src/lib/serveWebApp'
 import { applyCron } from './lib/cron'
 import { AppContext, createAppContext } from './lib/ctx'
 import { applyPassportToExpressApp } from './lib/passport'
@@ -29,6 +30,7 @@ void (async () => {
     })
     applyPassportToExpressApp(expressApp, ctx)
     await applyTrpcToExpressApp(expressApp, ctx, trpcRouter)
+    await applyServeWebApp(expressApp)
     applyCron(ctx)
     expressApp.use((error: unknown, req: express.Request, res: express.Response, next: express.NextFunction) => {
       logger.error('express', error)
