@@ -9,6 +9,7 @@ import { Segment } from '../../../components/Segment'
 import { useForm } from '../../../lib/form'
 import { withPageWrapper } from '../../../lib/pageWrapper'
 import { trpc } from '../../../lib/trpc'
+import { trackEvent } from '../../../lib/yandexMetrika'
 import css from '../auth.module.scss'
 
 export const SignUpPage = withPageWrapper({
@@ -32,6 +33,7 @@ export const SignUpPage = withPageWrapper({
     onSubmit: async (values) => {
       const { token } = await signUp.mutateAsync(values)
       formik.resetForm()
+      trackEvent('signup')
       Cookie.set('token', token, { expires: 99999 })
       void trpcUtils.invalidate()
     },

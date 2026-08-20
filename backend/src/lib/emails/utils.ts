@@ -9,7 +9,7 @@ import { logger } from '../logger'
 
 // memoize: когда в первый раз вызываем функцию getHtmlTemplates, вызовется async функция и вернёт htmlTemplates, но во все последующие вызовы она вернёт закешированный результат выполнения этой функции
 const getHbrTemplates = _.memoize(async () => {
-  const htmlPathsPattern = path.resolve(__dirname, '../emails/dist')
+  const htmlPathsPattern = path.resolve(__dirname, '../../emails/dist')
   const htmlPaths = fg.sync([`${htmlPathsPattern.replace(/\\/g, '/')}/*.html`])
   const hbrTemplates: Record<string, HandlebarsTemplateDelegate> = {}
   for (const htmlPath of htmlPaths) {
@@ -23,6 +23,9 @@ const getHbrTemplates = _.memoize(async () => {
 const getEmailHtml = async (templateName: string, templateVariables: Record<string, string> = {}) => {
   const hbrTemplates = await getHbrTemplates()
   const hbrTemplate = hbrTemplates[templateName]
+  if (!hbrTemplate) {
+    throw new Error(`Email template "${templateName}" was not found`)
+  }
   // получаем html с подставленными переменными
   const html = hbrTemplate(templateVariables)
   return html

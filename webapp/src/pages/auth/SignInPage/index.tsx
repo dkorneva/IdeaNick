@@ -8,6 +8,7 @@ import { Segment } from '../../../components/Segment'
 import { useForm } from '../../../lib/form'
 import { withPageWrapper } from '../../../lib/pageWrapper'
 import { trpc } from '../../../lib/trpc'
+import { trackEvent } from '../../../lib/yandexMetrika'
 import css from '../auth.module.scss'
 
 export const SignInPage = withPageWrapper({
@@ -24,6 +25,7 @@ export const SignInPage = withPageWrapper({
     validationSchema: zSignInTrpcInput,
     onSubmit: async (values) => {
       const { token } = await signIn.mutateAsync(values)
+      trackEvent('signin')
       Cookies.set('token', token, { expires: 99999 })
       void trpcUtils.invalidate() // инвалидация помечает все запросы, которые только что были отправлены и которые помнит приложение, как невалидные и перезапрашивает их
     },
