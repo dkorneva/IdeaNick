@@ -10,7 +10,14 @@
 
     .upload {
       .uploadLink {
-        @include link;
+        color: $gray;
+        text-decoration: none;
+
+        &:hover,
+        &:active {
+          color: $gray;
+          text-decoration: underline;
+        }
       }
     }
   }

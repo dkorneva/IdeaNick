@@ -40,7 +40,7 @@ export const AllIdeasPage = withPageWrapper({
   return (
     <Segment title="All Ideas">
       <div className={css.filter}>
-        <Input maxWidth={'100%'} label="Search" name="search" formik={formik} />
+        <Input placeholder="Search ideas..." maxWidth={'100%'} name="search" formik={formik} />
       </div>
       {isLoading || isRefetching ? (
         <Loader type="section" />
@@ -74,19 +74,13 @@ export const AllIdeasPage = withPageWrapper({
             {data.pages
               .flatMap((page) => page.ideas)
               .map((idea) => (
-                <div className={css.idea} key={idea.nick}>
-                  <Segment
-                    size={2}
-                    title={
-                      <Link className={css.ideaLink} to={getViewIdeaRoute({ ideaNick: idea.nick })}>
-                        {idea.name}
-                      </Link>
-                    }
-                    description={idea.description}
-                  >
-                    Likes: {idea.likesCount}
-                  </Segment>
-                </div>
+                <Link key={idea.nick} className={css.ideaLink} to={getViewIdeaRoute({ ideaNick: idea.nick })}>
+                  <div className={css.idea} key={idea.nick}>
+                    <Segment size={2} title={idea.name} description={idea.description}>
+                      {<div className={css.likes}>Likes: {idea.likesCount}</div>}
+                    </Segment>
+                  </div>
+                </Link>
               ))}
           </InfiniteScroll>
         </div>

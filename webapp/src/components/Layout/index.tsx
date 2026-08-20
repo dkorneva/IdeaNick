@@ -10,6 +10,7 @@ import {
   getSignOutRoute,
   getEditProfileRoute,
 } from '../../lib/routes'
+import { Icon } from '../Icon'
 import css from './index.module.scss'
 
 export const layoutContentElRef = createRef<HTMLDivElement>()
@@ -23,29 +24,35 @@ export const Layout = () => {
         <ul className={css.menu}>
           <li className={css.item}>
             <Link className={css.link} to={getAllIdeasRoute()}>
-              All Ideas
+              <Icon className={css.icon} name="home" />
+              <span>All Ideas</span>
             </Link>
           </li>
           {me ? (
             <>
               <li className={css.item}>
                 <Link className={css.link} to={getNewIdeaRoute()}>
-                  Add Idea
+                  <Icon className={css.icon} name="addIdea" />
+                  <span>Add Idea</span>
                 </Link>
               </li>
               <li className={css.item}>
                 <Link className={css.link} to={getEditProfileRoute()}>
-                  Edit Profile
+                  <Icon className={css.icon} name="editProfile" />
+                  <span>Edit Profile</span>
                 </Link>
               </li>
+              <hr />
               <li className={css.item}>
                 <Link className={css.link} to={getSignOutRoute()}>
-                  Log Out ({me.nick})
+                  <Icon className={css.icon} name="logout" />
+                  <span>Log Out ({me.nick})</span>
                 </Link>
               </li>
             </>
           ) : (
             <>
+              <hr />
               <li className={css.item}>
                 <Link className={css.link} to={getSignInRoute()}>
                   Sign In

@@ -3,7 +3,7 @@ import type React from 'react'
 import { Link } from 'react-router-dom'
 import css from './index.module.scss'
 
-type ButtonColor = 'red' | 'green'
+type ButtonColor = 'red' | 'green' | 'blue'
 export type ButtonProps = {
   children: React.ReactNode
   loading?: boolean

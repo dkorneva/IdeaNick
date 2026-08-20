@@ -12,6 +12,7 @@ import { UploadToCloudinary } from '../../../components/UploadToCloudinary'
 import { useForm } from '../../../lib/form'
 import { withPageWrapper } from '../../../lib/pageWrapper'
 import { trpc } from '../../../lib/trpc'
+import css from '../auth.module.scss'
 
 const General = ({ me }: { me: NonNullable<TrpcRouterOutput['getMe']['me']> }) => {
   const trpcUtils = trpc.useUtils()
@@ -34,8 +35,8 @@ const General = ({ me }: { me: NonNullable<TrpcRouterOutput['getMe']['me']> }) =
   return (
     <form onSubmit={formik.handleSubmit}>
       <FormItems>
-        <Input label="Nick" name="nick" formik={formik} />
-        <Input label="Name" name="name" formik={formik} />
+        <Input label="Nick" name="nick" maxWidth={320} formik={formik} />
+        <Input label="Name" name="name" maxWidth={320} formik={formik} />
         <UploadToCloudinary
           label="Avatar"
           name="avatar"
@@ -72,9 +73,9 @@ const Password = () => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <FormItems>
-        <Input label="Old password" name="oldPassword" formik={formik} type="password" />
-        <Input label="New password" name="newPassword" formik={formik} type="password" />
-        <Input label="New password again" name="newPasswordAgain" formik={formik} type="password" />
+        <Input label="Old password" name="oldPassword" maxWidth={320} formik={formik} type="password" />
+        <Input label="New password" name="newPassword" maxWidth={320} formik={formik} type="password" />
+        <Input label="New password again" name="newPasswordAgain" maxWidth={320} formik={formik} type="password" />
         <Alert {...alertProps}></Alert>
         <Button {...buttonProps}>Update Password</Button>
       </FormItems>
@@ -90,7 +91,7 @@ export const EditProfilePage = withPageWrapper({
   title: 'Edit Profile',
 })(({ me }) => {
   return (
-    <>
+    <div className={css.authPage}>
       <Segment title="Edit Profile">
         <Segment title="General" size={2}>
           <General me={me} />
@@ -99,6 +100,6 @@ export const EditProfilePage = withPageWrapper({
           <Password></Password>
         </Segment>
       </Segment>
-    </>
+    </div>
   )
 })

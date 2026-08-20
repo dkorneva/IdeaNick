@@ -1,0 +1,23 @@
+@import '../../styles/mixins';
+
+$breakpoint: '<=900px';
+
+.authPage {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  form {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  @include media($breakpoint) {
+    display: block;
+
+    form {
+      max-width: none;
+    }
+  }
+}

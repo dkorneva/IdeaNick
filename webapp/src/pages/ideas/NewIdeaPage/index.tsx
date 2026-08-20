@@ -47,14 +47,16 @@ export const NewIdeaPage = withPageWrapper({
         }}
       >
         <FormItems>
-          <Input name="name" label="Name" formik={formik} />
-          <Input name="nick" label="Nick" formik={formik} />
+          <Input name="name" label="Name" maxWidth={320} formik={formik} />
+          <Input name="nick" label="Nick" maxWidth={320} formik={formik} />
           <Input name="description" label="Description" formik={formik} maxWidth={500} />
           <TextArea name="text" label="Text" formik={formik} />
           <UploadsToCloudinary label="Images" name="images" type="image" preset="preview" formik={formik} />
           <UploadToS3 label="Certificate" name="certificate" formik={formik} />
           <UploadsToS3 label="Documents" name="documents" formik={formik} />
           <Alert {...alertProps}></Alert>
+          <br />
+          <br />
           <Button {...buttonProps}>Create Idea</Button>
         </FormItems>
       </form>

@@ -9,7 +9,8 @@ import { type FormikProps } from 'formik'
 import memoize from 'lodash/memoize'
 import { useCallback, useRef, useState } from 'react'
 import { trpc } from '../../lib/trpc'
-import { Button, Buttons } from '../Button'
+import { Button } from '../Button'
+import { Icon } from '../Icon'
 import css from './index.module.scss'
 
 export const useUploadToCloudinary = (type: CloudinaryUploadTypeName) => {
@@ -120,28 +121,24 @@ export const UploadToCloudinary = <TTypeName extends CloudinaryUploadTypeName>({
       {!!value && !loading && (
         <div className={css.previewPlace}>
           <img className={css.preview} src={getCloudinaryUploadUrl(value, type, preset)} alt="" />
+          <button
+            type="button"
+            className={css.delete}
+            onClick={() => {
+              void formik.setFieldValue(name, null)
+              formik.setFieldError(name, undefined)
+              void formik.setFieldTouched(name)
+            }}
+            disabled={disabled}
+          >
+            <Icon className={css.deleteIcon} name="delete" />
+          </button>
         </div>
       )}
       <div className={css.buttons}>
-        <Buttons>
-          <Button type="button" onClick={() => inputEl.current?.click()} loading={loading || disabled} color="green">
-            {value ? 'Upload another' : 'Upload'}
-          </Button>
-          {!!value && !loading && (
-            <Button
-              type="button"
-              color="red"
-              onClick={() => {
-                void formik.setFieldValue(name, null)
-                formik.setFieldError(name, undefined)
-                void formik.setFieldTouched(name)
-              }}
-              disabled={disabled}
-            >
-              Remove
-            </Button>
-          )}
-        </Buttons>
+        <Button type="button" onClick={() => inputEl.current?.click()} loading={loading || disabled} color="blue">
+          {value ? 'Upload another' : 'Upload'}
+        </Button>
       </div>
       {invalid && <div className={css.error}>{error}</div>}
     </div>

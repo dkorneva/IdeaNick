@@ -4,24 +4,35 @@
 @import '../../styles/mixins';
 
 .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-family: $defaultFontFamily;
+  font-size: $defaultFontSize;
+  line-height: $defaultLineHeight;
+  text-decoration: none;
+  appearance: none;
+
   padding: 8px 15px;
   color: $white;
   border: none;
   font-weight: bold;
-  border-radius: $borderRadiusSmall;
+  border-radius: $borderRadiusLarge;
   cursor: pointer;
   user-select: none;
   position: relative;
 
   &.color-green {
-    background-color: #0a980a;
+    background-color: #e0efd8;
+    color: #3a6132;
 
     &:hover {
-      background-color: #21b821;
+      background-color: #b6e1ad;
     }
 
     &:active {
-      background-color: #39d039;
+      background-color: #9ed692;
     }
   }
 
@@ -29,11 +40,24 @@
     background-color: $red;
 
     &:hover {
-      background-color: color.scale($red, $lightness: 10%);
+      background-color: color.scale($red, $lightness: -10%);
     }
 
     &:active {
-      background-color: color.scale($red, $lightness: 30%);
+      background-color: color.scale($red, $lightness: -30%);
+    }
+  }
+
+  &.color-blue {
+    background-color: $blueLight;
+    color: $blue;
+
+    &:hover {
+      background-color: color.scale($blueLight, $lightness: -10%);
+    }
+
+    &:active {
+      background-color: color.scale($blueLight, $lightness: -30%);
     }
   }
 

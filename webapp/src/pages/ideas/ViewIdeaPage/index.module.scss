@@ -1,6 +1,10 @@
 @import '../../../styles/mixins';
 @import '../../../styles/vars';
 
+.wrapper {
+  color: $deepBlue;
+}
+
 .createdAt {
   font-size: 12px;
   margin-bottom: 10px;
@@ -36,7 +40,12 @@
   margin: 10px 0;
 
   .certificateLink {
-    @include link;
+    color: $gray;
+
+    &:hover {
+      text-decoration: underline;
+    }
+    // @include link;
   }
 }
 
@@ -44,7 +53,12 @@
   margin: 10px 0;
 
   .documentLink {
-    @include link;
+    color: $gray;
+
+    &:hover {
+      text-decoration: underline;
+    }
+    // @include link;
   }
 }
 
@@ -58,10 +72,48 @@
 
 .likes {
   margin-top: 20px;
+  display: inline-flex;
+  width: fit-content;
+}
 
-  .likeButton {
-    @include link;
+.likeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: fit-content;
+  padding: 7px 10px;
+  color: $deepBlue;
+  background-color: $pinkLight;
+  border: none;
+  border-radius: $borderRadiusLarge;
+  font-family: $defaultFontFamily;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    color 200ms ease,
+    background-color 200ms ease;
+
+  &:hover,
+  &:active {
+    color: $pink;
+    transition: none;
   }
+}
+
+.likeIcon {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  display: block;
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+  align-items: center;
 }
 
 .editButton {

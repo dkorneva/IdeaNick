@@ -87,7 +87,7 @@ export const UploadsToS3 = ({ label, name, formik }: { label: string; name: stri
           onClick={() => inputEl.current?.click()}
           loading={loading}
           disabled={loading || disabled}
-          color="green"
+          color="blue"
         >
           {value ? 'Upload more' : 'Upload'}
         </Button>
