@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "test": "jest",
+    "test": "dotenv -e .env.test -e .env jest",
     "build": "tsc -b && vite build",
     "lint": "..\\node_modules\\.bin\\eslint.cmd --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts,.tsx .",
     "stylelint": "stylelint --cache --cache-location ./node_modules/.cache/.stylelintcache \"src/**/*.scss\"",
@@ -53,6 +53,7 @@
     "@types/react-image-gallery": "^1.2.4",
     "@types/react-infinite-scroller": "^1.2.5",
     "@vitejs/plugin-react": "^6.0.3",
+    "dotenv-cli": "^11.0.0",
     "eslint-plugin-node": "^11.1.0",
     "globals": "^17.7.0",
     "prettier": "^3.0.1",

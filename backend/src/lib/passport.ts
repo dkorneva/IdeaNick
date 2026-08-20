@@ -1,7 +1,7 @@
+import { env } from '../lib/env'
 import { type Express } from 'express'
 import { Passport } from 'passport'
 import { ExtractJwt, Strategy as JWTStrategy } from 'passport-jwt'
-import { env } from '../lib/env'
 import { AppContext } from './ctx'
 
 export const applyPassportToExpressApp = (expressApp: Express, ctx: AppContext): void => {

@@ -38,6 +38,11 @@ export default [
           groups: ['builtin', 'external', 'parent', 'sibling', 'index'],
           pathGroups: [
             {
+              pattern: '{.,..}/**/env',
+              group: 'builtin',
+              position: 'before',
+            },
+            {
               pattern: '{.,..}/**/test/integration',
               group: 'builtin',
               position: 'before',

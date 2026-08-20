@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { sharedEnv } from '@IdeaNick/shared/src/env'
 import { useParams as useReactRouterParams } from 'react-router-dom'
-// eslint-disable-next-line node/no-process-env
-const baseUrl = process.env.VITE_WEBAPP_URL || process.env.WEBAPP_URL
+
 type PumpedGetRouteInputBase = {
   abs?: boolean
 }
@@ -30,7 +30,7 @@ function pumpGetRoute(routeParamsOrGetRoute?: any, maybeGetRoute?: any) {
   const pumpedGetRoute = (routeParams?: PumpedGetRouteInputBase) => {
     const route = getRoute(routeParams)
     if (routeParams?.abs) {
-      return `${baseUrl}${route}`
+      return `${sharedEnv.WEBAPP_URL}${route}`
     } else {
       return route
     }

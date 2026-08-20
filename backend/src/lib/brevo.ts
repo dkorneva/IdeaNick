@@ -1,7 +1,7 @@
+import { env } from './env'
 import https from 'https'
 import { pick } from '@IdeaNick/shared/src/pick'
 import axios, { type AxiosResponse } from 'axios'
-import { env } from './env'
 
 const brevoHttpsAgent = new https.Agent({
   keepAlive: false,

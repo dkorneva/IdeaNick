@@ -1,5 +1,5 @@
-import { AppContext } from '../lib/ctx'
 import { env } from '../lib/env'
+import { AppContext } from '../lib/ctx'
 import { getPasswordHash } from '../utils/getPasswordHash'
 
 export const presetDb = async (ctx: AppContext) => {

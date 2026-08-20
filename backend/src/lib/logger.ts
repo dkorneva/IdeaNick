@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { env } from './env'
 import { EOL } from 'os'
 import { omit } from '@IdeaNick/shared/src/omit'
 import { TRPCError } from '@trpc/server'
@@ -10,7 +11,6 @@ import { MESSAGE } from 'triple-beam'
 import winston from 'winston'
 import * as yaml from 'yaml'
 import { deepMap } from '../utils/deepMap'
-import { env } from './env'
 import { ExpectedError } from './error'
 import { sentryCaptureException } from './sentry'
 
