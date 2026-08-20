@@ -16,13 +16,11 @@ $breakpoint: '<=900px';
     overflow: auto;
     flex: 0 0 260px;
     padding: 20px 30px;
-    border-right: 1px solid $black;
+    background-color: $blue;
     @include media($breakpoint) {
       overflow: visible;
       flex: 0 0 auto;
       height: auto;
-      border-right: none;
-      border-bottom: 1px solid $black;
     }
 
     .logo {
@@ -35,12 +33,31 @@ $breakpoint: '<=900px';
 
     .menu {
       .item {
-        &:not(:first-child) {
-          margin-top: 5px;
-        }
+        border-radius: $borderRadiusMedium;
 
         .link {
           @include link;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px;
+          border-radius: $borderRadiusMedium;
+        }
+
+        .icon {
+          color: currentcolor;
+          width: 18px;
+          height: 18px;
+          flex: 0 0 18px;
+          display: block;
+        }
+
+        &:hover {
+          .link {
+            background-color: $green;
+            color: $deepBlue;
+            transition: background-color 200ms ease;
+          }
         }
       }
     }

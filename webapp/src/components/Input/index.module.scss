@@ -10,27 +10,32 @@
   // данная запись же означает вложенность - т.е. где-то в элементе с классом field должен быть элемент с классом label, к которому применяются данные стили
   .label {
     font-weight: bold;
-    margin-bottom: 2px;
+    margin-bottom: 8px;
     display: block;
+    color: $deepBlue;
   }
 
   .input {
     display: block;
-    padding: 7px;
-    border: 1px solid $black;
-    border-radius: $borderRadiusSmall;
+    padding: 7px 7px 7px 16px;
+    border: 1px solid $gray;
+    border-radius: $borderRadiusLarge;
     background-color: $white;
     outline: none;
     width: 100%;
-    max-width: 200px;
-  }
+    font-family: $defaultFontFamily;
+    font-weight: 500;
+    color: $deepBlue;
+    margin-bottom: 8px;
 
-  &:focus {
-    border-color: $blue;
-  }
+    &:focus {
+      border-color: $blue;
+    }
 
-  &:invalid {
-    border-color: $red;
+    &.invalid,
+    &.invalid:focus {
+      border: 1px solid $red;
+    }
   }
 
   .error {

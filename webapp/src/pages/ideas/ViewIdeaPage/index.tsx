@@ -45,7 +45,8 @@ const LikeButton = ({ idea }: { idea: NonNullable<TrpcRouterOutput['getIdea']['i
         void setIdeaLike.mutateAsync({ ideaId: idea.id, isLikedByMe: !idea.isLikedByMe })
       }}
     >
-      <Icon size={32} className={css.likeIcon} name={idea.isLikedByMe ? 'likeFilled' : 'likeEmpty'} />
+      <Icon className={css.likeIcon} name={idea.isLikedByMe ? 'likeFilled' : 'likeEmpty'} />
+      <span className={css.likeText}>{idea.likesCount}</span>
     </button>
   )
 }
@@ -88,71 +89,67 @@ export const ViewIdeaPage = withPageWrapper({
   title: ({ idea }) => idea.name,
 })(({ idea, me }) => {
   return (
-    <Segment title={idea.name} description={idea.description}>
-      <div className={css.createdAt}>Created At: {format(idea.createdAt, 'yyyy-MM-dd')}</div>
-      <div className={css.author}>
-        <img className={css.avatar} alt="" src={getAvatarUrl(idea.author.avatar, 'small')} />
-        <div className={css.name}>
-          Author:
-          <br />
-          {idea.author.nick}
-          {idea.author.name ? ` (${idea.author.name})` : ''}
-        </div>
-      </div>
-      {!!idea.images.length && (
-        <div className={css.gallery}>
-          <ImageGallery
-            showPlayButton={false}
-            showFullscreenButton={false}
-            items={idea.images.map((image) => ({
-              original: getCloudinaryUploadUrl(image, 'image', 'large'),
-              thumbnail: getCloudinaryUploadUrl(image, 'image', 'preview'),
-            }))}
-          />
-        </div>
-      )}
-      {idea.certificate && (
-        <div className={css.certificate}>
-          Certificate:{' '}
-          <a className={css.certificateLink} target="_blank" href={getS3UploadUrl(idea.certificate)} rel="noreferrer">
-            {getS3UploadName(idea.certificate)}
-          </a>
-        </div>
-      )}
-      {/* преобразуем к boolean, т.к. в случае, если длина равна нулю, браузер выведет текст */}
-      {!!idea.documents.length && (
-        <div className={css.documents}>
-          Documents:{' '}
-          {idea.documents.map((document) => (
-            <Fragment key={document}>
-              <br />
-              <a className={css.documentLink} target="_blank" href={getS3UploadUrl(document)} rel="noreferrer">
-                {getS3UploadName(document)}
-              </a>
-            </Fragment>
-          ))}
-        </div>
-      )}
-      <div className={css.text} dangerouslySetInnerHTML={{ __html: idea.text }} />
-      <div className={css.likes}>
-        Likes: {idea.likesCount}
-        {me && (
-          <>
+    <div className={css.wrapper}>
+      <Segment title={idea.name} description={idea.description}>
+        <div className={css.createdAt}>Created At: {format(idea.createdAt, 'yyyy-MM-dd')}</div>
+        <div className={css.author}>
+          <img className={css.avatar} alt="" src={getAvatarUrl(idea.author.avatar, 'small')} />
+          <div className={css.name}>
+            Author:
             <br />
-            <LikeButton idea={idea} />
-          </>
+            {idea.author.nick}
+            {idea.author.name ? ` (${idea.author.name})` : ''}
+          </div>
+        </div>
+        {!!idea.images.length && (
+          <div className={css.gallery}>
+            <ImageGallery
+              showPlayButton={false}
+              showFullscreenButton={false}
+              items={idea.images.map((image) => ({
+                original: getCloudinaryUploadUrl(image, 'image', 'large'),
+                thumbnail: getCloudinaryUploadUrl(image, 'image', 'preview'),
+              }))}
+            />
+          </div>
         )}
-      </div>
-      {canEditIdea(me, idea) && (
-        <div className={css.editButton}>
-          <LinkButton to={getEditIdeaRoute({ ideaNick: idea.nick })}>Edit Idea</LinkButton>
+        {idea.certificate && (
+          <div className={css.certificate}>
+            Certificate:{' '}
+            <a className={css.certificateLink} target="_blank" href={getS3UploadUrl(idea.certificate)} rel="noreferrer">
+              {getS3UploadName(idea.certificate)}
+            </a>
+          </div>
+        )}
+        {/* преобразуем к boolean, т.к. в случае, если длина равна нулю, браузер выведет текст */}
+        {!!idea.documents.length && (
+          <div className={css.documents}>
+            Documents:{' '}
+            {idea.documents.map((document) => (
+              <Fragment key={document}>
+                <br />
+                <a className={css.documentLink} target="_blank" href={getS3UploadUrl(document)} rel="noreferrer">
+                  {getS3UploadName(document)}
+                </a>
+              </Fragment>
+            ))}
+          </div>
+        )}
+        <div className={css.text} dangerouslySetInnerHTML={{ __html: idea.text }} />
+        <div className={css.likes}>{me ? <LikeButton idea={idea} /> : <>Likes: {idea.likesCount}</>}</div>
+        <div className={css.buttons}>
+          {canEditIdea(me, idea) && (
+            <div className={css.editButton}>
+              <LinkButton to={getEditIdeaRoute({ ideaNick: idea.nick })}>Edit Idea</LinkButton>
+            </div>
+          )}
+          {canBlockIdeas(me) && (
+            <div className={css.blockIdea}>
+              <BlockIdea idea={idea} />
+            </div>
+          )}
         </div>
-      )}
-      {canBlockIdeas(me) && (
-        <div className={css.blockIdea}>
-          <BlockIdea idea={idea} />
-        </div>
-      )}
-    </Segment>
+      </Segment>
+    </div>
   )
 })

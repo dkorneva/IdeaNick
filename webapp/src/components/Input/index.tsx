@@ -11,12 +11,14 @@ export const Input = ({
   formik,
   maxWidth,
   type = 'text',
+  placeholder,
 }: {
   name: string
-  label: string
+  label?: string
   formik: FormikProps<any>
   maxWidth?: number | string
   type?: 'text' | 'password'
+  placeholder?: string | undefined
 }) => {
   const value = formik.values[name]
   const error = formik.errors[name] as string | undefined // необходимо чётко указать тип ошибки, т.к. без этого, считается, что error может содержать всё, что угодно
@@ -30,6 +32,7 @@ export const Input = ({
         {label}
       </label>
       <input
+        placeholder={placeholder}
         className={cn({ [css.input]: true, [css.invalid]: invalid })}
         style={{ maxWidth }}
         type={type}

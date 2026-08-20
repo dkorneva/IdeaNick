@@ -6,10 +6,20 @@
 }
 
 .ideas {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
   .idea {
     padding: 20px;
-    border: 1px solid $black;
+    margin-bottom: 20px;
+    background-color: $creamyLight;
     border-radius: 10px;
+    color: $deepBlue;
+
+    &:hover {
+      box-shadow: 1px 4px 4px rgb(0, 0, 0, 0.025);
+    }
 
     & + .idea {
       margin-top: 20px;
@@ -23,4 +33,12 @@
   .more {
     margin-top: 15px;
   }
+}
+
+.likes {
+  display: inline-block;
+  background-color: $pinkLight;
+  color: $pink;
+  padding: 9px;
+  border-radius: $borderRadiusLarge;
 }

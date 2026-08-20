@@ -1,14 +1,27 @@
+@import 'https://fonts.googleapis.com/css2?family=Erica+One&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap';
+
 $white: #fff;
+$creamy: #fef5e4;
+$creamyLight: #fffaf2;
 $black: #000;
-$blue: #00c;
-$red: #c00;
+$blueLight: #d1cff7;
+$blue: #4e55ab;
+$deepBlue: #272751;
+$green: #b6e1ad;
+$red: #c43a59;
 $gray: #ccc;
+$pink: #c45aab;
+$pinkLight: #e6d5e8;
 $grayLight: #eee;
 
-$defaultFontFamily: 'Helvetica', 'sans-serif';
+$headingsFontFamily: 'Erica One', 'sans-serif';
+$defaultFontFamily: 'Quicksand', 'sans-serif';
 $defaultFontSize: 14px;
-$defaultBackgroundColor: $white;
+$defaultBackgroundColor: $creamy;
 $defaultTextColor: $black;
 $defaultLineHeight: 1.2;
 
 $borderRadiusSmall: 3px;
+$borderRadiusMedium: 5px;
+$borderRadiusLarge: 20px;

@@ -61,6 +61,8 @@ export const EditIdeaPage = withPageWrapper({
           <UploadToS3 label="Certificate" name="certificate" formik={formik} />
           <UploadsToS3 label="Documents" name="documents" formik={formik} />
           <Alert {...alertProps}></Alert>
+          <br />
+          <br />
           <Button {...buttonProps}>Update Idea</Button>
         </FormItems>
       </form>

@@ -9,6 +9,7 @@ import { Segment } from '../../../components/Segment'
 import { useForm } from '../../../lib/form'
 import { withPageWrapper } from '../../../lib/pageWrapper'
 import { trpc } from '../../../lib/trpc'
+import css from '../auth.module.scss'
 
 export const SignUpPage = withPageWrapper({
   redirectAuthorized: true,
@@ -37,17 +38,19 @@ export const SignUpPage = withPageWrapper({
     resetOnSuccess: false,
   })
   return (
-    <Segment title="Sign Up">
-      <form onSubmit={formik.handleSubmit}>
-        <FormItems>
-          <Input label="Nick" name="nick" formik={formik} />
-          <Input label="E-mail" name="email" formik={formik} />
-          <Input label="Password" name="password" type="password" formik={formik} />
-          <Input label="Password again" name="passwordAgain" type="password" formik={formik} />
-          <Alert {...alertProps}></Alert>
-          <Button {...buttonProps}>Sign Up</Button>
-        </FormItems>
-      </form>
-    </Segment>
+    <div className={css.authPage}>
+      <Segment title="Sign Up">
+        <form onSubmit={formik.handleSubmit}>
+          <FormItems>
+            <Input label="Nick" name="nick" formik={formik} />
+            <Input label="E-mail" name="email" formik={formik} />
+            <Input label="Password" name="password" type="password" formik={formik} />
+            <Input label="Password again" name="passwordAgain" type="password" formik={formik} />
+            <Alert {...alertProps}></Alert>
+            <Button {...buttonProps}>Sign Up</Button>
+          </FormItems>
+        </form>
+      </Segment>
+    </div>
   )
 })
