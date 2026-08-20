@@ -19,5 +19,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["vite.config.mts"]
+  "include": ["vite.config.mts", "src/lib/parsePublicEnv.ts"]
 }

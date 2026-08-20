@@ -1,8 +1,11 @@
+/* eslint-disable node/no-process-env */
 import { env } from './env'
 import { promises as fs } from 'fs'
 import path from 'path'
+import { parsePublicEnv } from '@IdeaNick/webapp/src/lib/parsePublicEnv'
 import express, { type Express } from 'express'
 import { logger } from './logger'
+
 const checkFileExists = async (filePath: string) => {
   return await fs
     .access(filePath, fs.constants.F_OK)
@@ -30,10 +33,12 @@ export const applyServeWebApp = async (expressApp: Express) => {
     }
   }
   const htmlSource = await fs.readFile(path.resolve(webappDistDir, 'index.html'), 'utf8')
+  const publicEnv = parsePublicEnv(process.env)
+  const htmlSourceWithEnv = htmlSource.replace('{ replaceMeWithPublicEnv: true }', JSON.stringify(publicEnv, null, 2))
   // статика - например, assets
   // т.е. раздавать html файл по любому url кроме тех, которые являются статическими
   expressApp.use(express.static(webappDistDir, { index: false }))
   expressApp.get('/{*splat}', (req, res) => {
-    res.send(htmlSource)
+    res.send(htmlSourceWithEnv)
   })
 }
