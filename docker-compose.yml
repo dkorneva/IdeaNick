@@ -9,8 +9,8 @@ services:
       args:
         # ${...} is used to get value from env of host machine
         DATABASE_URL: ${DATABASE_URL}
-        SENTRY_AUTH_TOKEN: ${SENTRY_AUTH_TOKEN}
-        SOURCE_VERSION: ${SOURCE_VERSION}
+        SENTRY_AUTH_TOKEN: ${SENTRY_AUTH_TOKEN:-}
+        SOURCE_VERSION: ${SOURCE_VERSION:-local}
     # env file and ports used in runtime of container, not in image build
     env_file:
       - ./webapp/.env
@@ -20,3 +20,32 @@ services:
       - 'host.docker.internal:host-gateway'
     ports:
       - '127.0.0.1:3000:3000'
+    labels:
+      com.datadoghq.tags.env: production
+      com.datadoghq.tags.service: ideanick
+      com.datadoghq.tags.version: ${SOURCE_VERSION:-local}
+    networks:
+      - app-network
+
+  datadog-agent:
+    image: gcr.io/datadoghq/agent:7
+    container_name: ideanick-datadog-agent
+    environment:
+      DD_API_KEY: ${DD_API_KEY}
+      DD_ENV: production
+      DD_SERVICE: ideanick
+      DD_SITE: datadoghq.eu
+      DD_LOGS_ENABLED: true
+      DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL: true
+      DD_CONTAINER_EXCLUDE_LOGS: name:ideanick-datadog-agent
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - /opt/datadog-agent/run:/opt/datadog-agent/run:rw
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
