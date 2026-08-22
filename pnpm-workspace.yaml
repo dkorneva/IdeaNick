@@ -7,6 +7,7 @@ allowBuilds:
   '@parcel/watcher': true
   '@prisma/engines': false
   '@sentry/cli': false
+  core-js: false
   esbuild: false
   prisma: false
   unrs-resolver: false
