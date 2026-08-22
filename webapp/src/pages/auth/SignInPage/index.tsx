@@ -1,4 +1,4 @@
-import { zSignInTrpcInput } from '@IdeaNick/backend/src/router/auth/SignIn/input'
+import { zSignInTrpcInput } from '@IdeaNick/backend/src/router/auth/signIn/input'
 import Cookies from 'js-cookie'
 import { Alert } from '../../../components/Alert'
 import { Button } from '../../../components/Button'

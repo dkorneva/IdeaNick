@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { getS3UploadName, getS3UploadUrl } from '@ideanick/shared/src/s3'
+import { getS3UploadName, getS3UploadUrl } from '@IdeaNick/shared/src/s3'
 import cn from 'classnames'
 import { type FormikProps } from 'formik'
 import { useRef, useState } from 'react'

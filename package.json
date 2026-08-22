@@ -2,7 +2,7 @@
   "name": "IdeaNick",
   "private": true,
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "b": "pnpm --filter @IdeaNick/backend",
     "w": "pnpm --filter @IdeaNick/webapp",
@@ -12,14 +12,20 @@
     "types": "pnpm b types && pnpm w types",
     "lint": "pnpm b lint && pnpm w lint",
     "prettify": "pnpm -r --parallel prettify",
+    "dcc": "dotenv -e ./.env.docker -e ./backend/.env -e ./webapp/.env -- docker compose config",
+    "dcb": "dotenv -e ./.env.docker -e ./backend/.env -e ./webapp/.env -- docker compose build",
+    "dcu": "dotenv -e ./.env.docker -e ./backend/.env -e ./webapp/.env -- docker compose up",
     "prepare": "husky"
+  },
+  "dependencies": {
+    "dotenv-cli": "^11.0.0",
+    "cross-env": "^10.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
     "@types/jest": "^30.0.0",
     "concurrently": "^10.0.4",
     "copyfiles": "^2.4.1",
-    "cross-env": "^10.1.0",
     "eslint": "^9.20.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-import": "^2.32.0",

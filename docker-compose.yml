@@ -1,0 +1,22 @@
+services:
+  app:
+    #platform: linux/amd64 # uncomment to build for amd64 which used in heroku
+    image: dkorneva/ideanick-image:latest
+    container_name: ideanick-container
+    build:
+      context: .
+      # args used in image build as env variables
+      args:
+        # ${...} is used to get value from env of host machine
+        DATABASE_URL: ${DATABASE_URL}
+        SENTRY_AUTH_TOKEN: ${SENTRY_AUTH_TOKEN}
+        SOURCE_VERSION: ${SOURCE_VERSION}
+    # env file and ports used in runtime of container, not in image build
+    env_file:
+      - ./webapp/.env
+      - ./backend/.env
+      - ./.env.docker
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    ports:
+      - '127.0.0.1:3000:3000'

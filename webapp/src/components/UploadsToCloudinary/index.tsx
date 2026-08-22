@@ -3,7 +3,7 @@ import {
   type CloudinaryUploadPresetName,
   type CloudinaryUploadTypeName,
   getCloudinaryUploadUrl,
-} from '@ideanick/shared/src/cloudinary'
+} from '@IdeaNick/shared/src/cloudinary'
 import cn from 'classnames'
 import { type FormikProps } from 'formik'
 import { useRef, useState } from 'react'
