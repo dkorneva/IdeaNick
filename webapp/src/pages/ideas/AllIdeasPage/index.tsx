@@ -38,7 +38,7 @@ export const AllIdeasPage = withPageWrapper({
     )
 
   return (
-    <Segment title="All Ideas 1">
+    <Segment title="All Ideas">
       <div className={css.filter}>
         <Input placeholder="Search ideas..." maxWidth={'100%'} name="search" formik={formik} />
       </div>
