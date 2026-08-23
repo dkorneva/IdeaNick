@@ -1,6 +1,10 @@
-import { getNewIdeaRoute, getViewIdeaRoute } from '@IdeaNick/webapp/src/lib/routes'
+import { sharedEnv } from '@IdeaNick/shared/src/env'
 import { type Idea, type User } from '../../generated/prisma/client'
 import { sendEmail } from './utils'
+
+const getNewIdeaRoute = () => `${sharedEnv.WEBAPP_URL}/ideas/new-idea`
+
+const getViewIdeaRoute = ({ ideaNick }: { ideaNick: string }) => `${sharedEnv.WEBAPP_URL}/ideas/${ideaNick}`
 
 export const sendWelcomeEmail = async ({ user }: { user: Pick<User, 'nick' | 'email'> }) => {
   return await sendEmail({
@@ -9,7 +13,7 @@ export const sendWelcomeEmail = async ({ user }: { user: Pick<User, 'nick' | 'em
     templateName: 'welcome',
     templateVariables: {
       userNick: user.nick,
-      addIdeaUrl: `${getNewIdeaRoute({ abs: true })}`,
+      addIdeaUrl: getNewIdeaRoute(),
     },
   })
 }
@@ -37,7 +41,7 @@ export const sendMostLikedIdeasEmail = async ({
     subject: 'Most Liked Ideas!',
     templateName: 'mostLikedIdeas',
     templateVariables: {
-      ideas: ideas.map((idea) => ({ name: idea.name, url: getViewIdeaRoute({ abs: true, ideaNick: idea.nick }) })),
+      ideas: ideas.map((idea) => ({ name: idea.name, url: getViewIdeaRoute({ ideaNick: idea.nick }) })),
     },
   })
 }

@@ -64,6 +64,7 @@
 
 .text {
   font-size: 14px;
+  white-space: pre-wrap;
 
   & > *:not(:first-child) {
     margin-top: 10px;

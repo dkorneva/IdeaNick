@@ -15,5 +15,5 @@ export const zEnv = z.object({
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const envFromBackend = (window as any).webappEnvFromBackend
 // eslint-disable-next-line node/no-process-env
-export const env = zEnv.parse(envFromBackend.replaceMewithPublicEnv ? process.env : envFromBackend)
+export const env = zEnv.parse(envFromBackend.replaceMeWithPublicEnv ? process.env : envFromBackend)
 // если в dev режиме, то process.env, иначе - envFromBackend

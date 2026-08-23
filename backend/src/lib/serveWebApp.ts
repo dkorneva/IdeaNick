@@ -2,9 +2,19 @@
 import { env } from './env'
 import { promises as fs } from 'fs'
 import path from 'path'
-import { parsePublicEnv } from '@IdeaNick/webapp/src/lib/parsePublicEnv'
 import express, { type Express } from 'express'
 import { logger } from './logger'
+
+const parsePublicEnv = (env: Record<string, string | undefined>) =>
+  Object.entries(env).reduce<Record<string, string | undefined>>((acc, [key, value]) => {
+    if (key.startsWith('VITE_') || ['NODE_ENV', 'HOST_ENV', 'SOURCE_VERSION'].includes(key)) {
+      return {
+        ...acc,
+        [key]: value,
+      }
+    }
+    return acc
+  }, {})
 
 const checkFileExists = async (filePath: string) => {
   return await fs
